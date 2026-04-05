@@ -17,8 +17,8 @@ export const ja = {
     search: "パッケージを検索...",
     stats: (count: number) => `${count} 個のパッケージが軌道上に`,
     what: {
-      title: "gargantua とは？",
-      desc: 'Common Lisp のパッケージレジストリです。パッケージは gargantua の重力場を周回し、<strong>area51</strong> を使ってローカル環境に取り込めます。',
+      title: "Gravity Lensing とは？",
+      desc: 'Common Lisp のパッケージレジストリです。パッケージは glensing の重力場を周回し、<strong>area51</strong> を使ってローカル環境に取り込めます。',
     },
     flow: {
       registry: "パッケージレジストリ",
@@ -42,7 +42,7 @@ export const ja = {
     a51: {
       subtitle: "Common Lisp パッケージマネージャ",
       add: "パッケージを追加",
-      addDesc: "<strong>gargantua</strong> から取得してローカルにインストールします。",
+      addDesc: "<strong>glensing</strong> から取得してローカルにインストールします。",
       how: "仕組み",
       registry: "レジストリ",
       local: "あなたのマシン",
@@ -107,7 +107,7 @@ export const ja = {
   docs: {
     label: "ドキュメント",
     title: "はじめかた",
-    subtitle: "gargantua と area51 パッケージマネージャを使って Common Lisp プロジェクトを始めるために必要なすべて。",
+    subtitle: "Gravity Lensing と area51 パッケージマネージャを使って Common Lisp プロジェクトを始めるために必要なすべて。",
     prerequisites: {
       title: "前提条件",
       text: "area51 をインストールする前に、動作する Common Lisp 処理系が必要です。パフォーマンスと幅広い互換性から <strong>SBCL</strong>（Steel Bank Common Lisp）を推奨しますが、準拠する処理系であればどれでも使えます。",
@@ -172,33 +172,33 @@ export const ja = {
   // About page
   about: {
     label: "概要",
-    title: "gargantua について",
+    title: "Gravity Lensing について",
     subtitle: "Common Lisp のパッケージレジストリとエコシステム。",
     whatGargantua: {
-      title: "gargantua とは？",
-      desc: "gargantua は Common Lisp のパッケージレジストリです。Quicklisp エコシステムのパッケージをインデックスし、検索・閲覧可能なインターフェースで提供します。Common Lisp ライブラリが軌道を周回する中央ハブであり、あなたのプロジェクトに取り込む準備ができています。",
+      title: "Gravity Lensing とは？",
+      desc: "Gravity Lensing は Common Lisp のパッケージレジストリです。Quicklisp エコシステムのパッケージをインデックスし、検索・閲覧可能なインターフェースで提供します。Common Lisp ライブラリが軌道を周回する中央ハブであり、あなたのプロジェクトに取り込む準備ができています。",
     },
     whatArea51: {
       title: "area51 とは？",
-      desc: "area51 は Common Lisp のコマンドラインパッケージマネージャです。依存関係の解決、バージョンのロック、プロジェクトのパッケージをローカルで管理します。gargantua が空のレジストリなら、area51 はあなたのマシン上の地上局です。",
+      desc: "area51 は Common Lisp のコマンドラインパッケージマネージャです。依存関係の解決、バージョンのロック、プロジェクトのパッケージをローカルで管理します。Gravity Lensing が空のレジストリなら、area51 はあなたのマシン上の地上局です。",
     },
     relationship: {
       title: "連携の仕組み",
-      desc: "gargantua はパッケージをホスティングしインデックスします。area51 は gargantua に問い合わせてパッケージを検索、ダウンロード、管理します。gargantua で検索・閲覧し、area51 でインストール・ビルドします。",
+      desc: "Gravity Lensing はパッケージをホスティングしインデックスします。area51 は glensing に問い合わせてパッケージを検索、ダウンロード、管理します。Gravity Lensing で検索・閲覧し、area51 でインストール・ビルドします。",
       registry: "パッケージレジストリ",
       cli: "CLI パッケージマネージャ",
       browse: "閲覧・検索",
       install: "インストール・管理",
     },
     name: {
-      title: "なぜ「gargantua」？",
-      desc: "「gargantua」は映画「インターステラー」に登場する超大質量ブラックホールの名前です。多くの言語に影響を与えた Lisp はまるで gargantua の重力のようです。偉大な Lisp エイリアンが作り出した素晴らしいパッケージは Lisp の重力圏を周回し、あなたのプロジェクトに取り込まれるのを待っています。",
+      title: "なぜ「Gravity Lensing」？",
+      desc: "「Gravity Lensing」は重力レンズ（gravitational lensing）に由来します。ブラックホールの重力が光を曲げてその向こうにあるものを映し出すのです。そして現代の多くのプログラミング言語は Lisp に影響を受けています。Lisp は重力そのものです。偉大な Lisp Alien たちが生み出した素晴らしいライブラリは Lisp の重力圏を周回しています。重力レンズを通して Common Lisp のパッケージを見つけ出せるようにと命名しました。",
     },
     openSource: {
       title: "オープンソース",
-      desc: "gargantua と area51 はどちらもオープンソースです。パッケージデータは Quicklisp から取得しています。コントリビューション歓迎です。",
+      desc: "Gravity Lensing と area51 はどちらもオープンソースです。パッケージデータは Quicklisp から取得しています。コントリビューション歓迎です。",
     },
-    gargantuaRepo: "gargantua を GitHub で見る",
+    gargantuaRepo: "glensing を GitHub で見る",
     area51Repo: "area51 を GitHub で見る",
   },
 
@@ -206,11 +206,11 @@ export const ja = {
   faq: {
     label: "FAQ",
     title: "よくある質問",
-    subtitle: "gargantua と area51 に関するよくある質問。",
+    subtitle: "Gravity Lensing と area51 に関するよくある質問。",
     items: [
       {
-        q: "gargantua とは何ですか？",
-        a: "gargantua は Common Lisp のパッケージレジストリです。Common Lisp ライブラリを検索できる Web インターフェースを提供し、パッケージの詳細、依存関係、使用方法の情報を掲載しています。",
+        q: "glensing とは何ですか？",
+        a: "Gravity Lensing は Common Lisp のパッケージレジストリです。Common Lisp ライブラリを検索できる Web インターフェースを提供し、パッケージの詳細、依存関係、使用方法の情報を掲載しています。",
       },
       {
         q: "area51 とは何ですか？",
@@ -230,15 +230,15 @@ export const ja = {
       },
       {
         q: "Quicklisp は必要ですか？",
-        a: "いいえ。area51 はスタンドアロンのパッケージマネージャです。パッケージメタデータを gargantua から取得し、ソースを直接ダウンロードします。Quicklisp のインストールは不要です。",
+        a: "いいえ。area51 はスタンドアロンのパッケージマネージャです。パッケージメタデータを glensing から取得し、ソースを直接ダウンロードします。Quicklisp のインストールは不要です。",
       },
       {
         q: "パッケージの公開方法は？",
-        a: "パッケージの公開機能は近日公開予定です。現在、gargantua は Quicklisp ディストリビューションからパッケージをインデックスしています。直接公開のサポートをお待ちください。",
+        a: "パッケージの公開機能は近日公開予定です。現在、glensing は Quicklisp ディストリビューションからパッケージをインデックスしています。直接公開のサポートをお待ちください。",
       },
       {
-        q: "gargantua は無料ですか？",
-        a: "はい。gargantua と area51 はどちらも無料のオープンソースソフトウェアです。",
+        q: "glensing は無料ですか？",
+        a: "はい。Gravity Lensing と area51 はどちらも無料のオープンソースソフトウェアです。",
       },
     ],
   },
@@ -250,6 +250,6 @@ export const ja = {
     packages: { label: "パッケージ", desc: "軌道上の全パッケージを閲覧" },
     area51: { label: "area51", desc: "CL パッケージマネージャ" },
     docs: { label: "ドキュメント", desc: "はじめかたガイド" },
-    home: { label: "gargantua", desc: "ブラックホールに戻る" },
+    home: { label: "Gravity Lensing", desc: "ブラックホールに戻る" },
   },
 } as const;

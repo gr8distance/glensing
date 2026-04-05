@@ -34,7 +34,7 @@ export function Area51Template({ locale = "en" }: Props) {
           <div className="a51-diagram">
             <div className="a51-node a51-node--registry">
               <span className="a51-node-icon">&#x2B50;</span>
-              <span className="a51-node-label">gargantua</span>
+              <span className="a51-node-label">Gravity Lensing</span>
               <span className="a51-node-desc">{t.a51.registry}</span>
             </div>
             <div className="a51-arrow">

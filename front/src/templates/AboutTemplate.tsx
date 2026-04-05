@@ -40,7 +40,7 @@ export function AboutTemplate({ locale = "en" }: Props) {
           <div className="about-diagram">
             <div className="about-node about-node--registry">
               <span className="about-node-icon">&#x2B50;</span>
-              <span className="about-node-label">gargantua</span>
+              <span className="about-node-label">Gravity Lensing</span>
               <span className="about-node-desc">{t.about.relationship.registry}</span>
               <span className="about-node-role">{t.about.relationship.browse}</span>
             </div>

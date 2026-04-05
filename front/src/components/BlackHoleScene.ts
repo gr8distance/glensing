@@ -758,7 +758,7 @@ export function initScene(
 
     beam.mat.color.setHSL(0.38 + Math.random() * 0.05, 0.85, 0.55);
 
-    callbacks.onInstallLog?.(`Fetching ${pkg.name} from gargantua...`, false);
+    callbacks.onInstallLog?.(`Fetching ${pkg.name} from glensing...`, false);
   }
 
   function bezier(out: THREE.Vector3, a: THREE.Vector3, b: THREE.Vector3, c: THREE.Vector3, t: number) {

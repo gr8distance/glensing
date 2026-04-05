@@ -291,7 +291,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
       {/* Hero overlay */}
       <div ref={overlayRef} className={`top-overlay${overlayFaded ? " faded" : ""}`}>
         <div className="top-title">
-          <h1>gargantua</h1>
+          <h1>Gravity Lensing</h1>
           <p className="top-tagline">{t.top.tagline}</p>
         </div>
 
@@ -356,7 +356,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
               <div className="flow-node">
                 <span className="flow-icon bh">&#9679;</span>
                 <div>
-                  <div className="flow-title">gargantua</div>
+                  <div className="flow-title">glensing</div>
                   <div className="flow-desc">{t.top.flow.registry}</div>
                 </div>
               </div>
@@ -422,7 +422,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
         </section>
 
         <footer className="top-footer">
-          <p>gargantua &mdash; {t.top.tagline}</p>
+          <p>glensing &mdash; {t.top.tagline}</p>
           <p className="footer-sub">{t.footer.powered} <a href={localePath(locale, "/area51")}>area51</a></p>
         </footer>
       </div>
@@ -546,7 +546,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
           <div className="a51-flow">
             <div className="a51-node">
               <span className="a51-node-icon">&#9679;</span>
-              <span>gargantua</span>
+              <span>glensing</span>
               <span className="a51-node-desc">{t.top.a51.registry}</span>
             </div>
             <div className="a51-arrow">&darr;</div>

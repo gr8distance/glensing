@@ -17,8 +17,8 @@ export const en = {
     search: "Search packages...",
     stats: (count: number) => `${count} packages in orbit`,
     what: {
-      title: "What is gargantua?",
-      desc: 'A package registry for Common Lisp. Packages orbit in gargantua\'s gravitational field, ready to be pulled into your local environment via <strong>area51</strong>.',
+      title: "What is Gravity Lensing?",
+      desc: 'A package registry for Common Lisp. Packages orbit in glensing\'s gravitational field, ready to be pulled into your local environment via <strong>area51</strong>.',
     },
     flow: {
       registry: "Package Registry",
@@ -42,7 +42,7 @@ export const en = {
     a51: {
       subtitle: "Common Lisp Package Manager",
       add: "Add a package",
-      addDesc: "Packages are fetched from <strong>gargantua</strong> and installed locally.",
+      addDesc: "Packages are fetched from <strong>glensing</strong> and installed locally.",
       how: "How it works",
       registry: "Registry",
       local: "Your machine",
@@ -107,7 +107,7 @@ export const en = {
   docs: {
     label: "Documentation",
     title: "Getting Started",
-    subtitle: "Everything you need to start building Common Lisp projects with gargantua and the area51 package manager.",
+    subtitle: "Everything you need to start building Common Lisp projects with glensing and the area51 package manager.",
     prerequisites: {
       title: "Prerequisites",
       text: "Before installing area51, you need a working Common Lisp implementation. We recommend <strong>SBCL</strong> (Steel Bank Common Lisp) for its performance and wide compatibility, but any conforming implementation will work.",
@@ -172,33 +172,33 @@ export const en = {
   // About page
   about: {
     label: "About",
-    title: "About gargantua",
+    title: "About Gravity Lensing",
     subtitle: "A package registry and ecosystem for Common Lisp.",
     whatGargantua: {
-      title: "What is gargantua?",
-      desc: "gargantua is a package registry for Common Lisp. It indexes packages from the Quicklisp ecosystem and presents them in a searchable, browsable interface. Think of it as the central hub where Common Lisp libraries orbit, ready to be discovered and pulled into your projects.",
+      title: "What is Gravity Lensing?",
+      desc: "Gravity Lensing is a package registry for Common Lisp. It indexes packages from the Quicklisp ecosystem and presents them in a searchable, browsable interface. Think of it as the central hub where Common Lisp libraries orbit, ready to be discovered and pulled into your projects.",
     },
     whatArea51: {
       title: "What is area51?",
-      desc: "area51 is a command-line package manager for Common Lisp. It resolves dependencies, locks versions, and manages your project's packages locally. If gargantua is the registry in the sky, area51 is the ground station on your machine.",
+      desc: "area51 is a command-line package manager for Common Lisp. It resolves dependencies, locks versions, and manages your project's packages locally. If Gravity Lensing is the registry in the sky, area51 is the ground station on your machine.",
     },
     relationship: {
       title: "How they work together",
-      desc: "gargantua hosts and indexes packages. area51 queries gargantua to find, download, and manage them on your machine. You search and browse on gargantua; you install and build with area51.",
+      desc: "Gravity Lensing hosts and indexes packages. area51 queries Gravity Lensing to find, download, and manage them on your machine. You search and browse on Gravity Lensing; you install and build with area51.",
       registry: "Package Registry",
       cli: "CLI Package Manager",
       browse: "Browse & search",
       install: "Install & manage",
     },
     name: {
-      title: "Why \"gargantua\"?",
-      desc: "The name comes from the supermassive black hole in the film Interstellar. Lisp, which has influenced so many languages, is like the gravity of gargantua. The wonderful packages created by the great Lisp aliens orbit in Lisp's gravitational field, waiting to be pulled into your projects.",
+      title: "Why \"Gravity Lensing\"?",
+      desc: "The name comes from gravitational lensing \u2014 a black hole's gravity bends light to reveal what lies beyond. Many of today's programming languages have been influenced by Lisp. Lisp is gravity itself. The brilliant libraries created by the great Lisp Aliens orbit within Lisp's gravitational field. We named it Gravity Lensing so you can find Common Lisp packages through the lens of that gravity.",
     },
     openSource: {
       title: "Open source",
-      desc: "Both gargantua and area51 are open source. Package data is sourced from Quicklisp. Contributions are welcome.",
+      desc: "Both Gravity Lensing and area51 are open source. Package data is sourced from Quicklisp. Contributions are welcome.",
     },
-    gargantuaRepo: "gargantua on GitHub",
+    gargantuaRepo: "glensing on GitHub",
     area51Repo: "area51 on GitHub",
   },
 
@@ -206,11 +206,11 @@ export const en = {
   faq: {
     label: "FAQ",
     title: "Frequently Asked Questions",
-    subtitle: "Common questions about gargantua and area51.",
+    subtitle: "Common questions about glensing and area51.",
     items: [
       {
-        q: "What is gargantua?",
-        a: "gargantua is a package registry for Common Lisp. It provides a searchable web interface for discovering Common Lisp libraries, with package details, dependencies, and usage information.",
+        q: "What is glensing?",
+        a: "Gravity Lensing is a package registry for Common Lisp. It provides a searchable web interface for discovering Common Lisp libraries, with package details, dependencies, and usage information.",
       },
       {
         q: "What is area51?",
@@ -230,15 +230,15 @@ export const en = {
       },
       {
         q: "Is Quicklisp required?",
-        a: "No. area51 is a standalone package manager. It fetches package metadata from gargantua and downloads sources directly. You do not need Quicklisp installed.",
+        a: "No. area51 is a standalone package manager. It fetches package metadata from glensing and downloads sources directly. You do not need Quicklisp installed.",
       },
       {
         q: "How do I publish a package?",
-        a: "Package publishing is coming soon. Currently, gargantua indexes packages from the Quicklisp distribution. Stay tuned for direct publishing support.",
+        a: "Package publishing is coming soon. Currently, glensing indexes packages from the Quicklisp distribution. Stay tuned for direct publishing support.",
       },
       {
-        q: "Is gargantua free?",
-        a: "Yes. Both gargantua and area51 are free and open source software.",
+        q: "Is glensing free?",
+        a: "Yes. Both Gravity Lensing and area51 are free and open source software.",
       },
     ],
   },
@@ -250,6 +250,6 @@ export const en = {
     packages: { label: "Packages", desc: "Browse all packages in orbit" },
     area51: { label: "area51", desc: "The CL package manager" },
     docs: { label: "Docs", desc: "Getting started guide" },
-    home: { label: "gargantua", desc: "Back to the black hole" },
+    home: { label: "Gravity Lensing", desc: "Back to the black hole" },
   },
 } as const;

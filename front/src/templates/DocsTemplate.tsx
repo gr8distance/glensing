@@ -108,7 +108,7 @@ area51 add some-lib --url https://example.com/lib.tar.gz`}</code></pre>
           <h2 className="docs-section-title">{t.docs.browsing.title}</h2>
           <p className="docs-text">
             {t.docs.browsing.text}{" "}
-            <a href={localePath(locale, "/packages")}>gargantua.space/packages</a>.
+            <a href={localePath(locale, "/packages")}>glensing.space/packages</a>.
           </p>
           <p className="docs-text">{t.docs.browsing.installed}</p>
           <div className="docs-code-block">

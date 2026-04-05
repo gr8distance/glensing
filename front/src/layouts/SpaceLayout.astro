@@ -28,7 +28,7 @@ const altPath = switchLocalePath(altLocale, currentPath);
   <meta name="description" content={desc}>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate" hreflang={altLocale} href={altPath}>
-  <title>{title} — gargantua</title>
+  <title>{title} — glensing</title>
 </head>
 <body>
   {!has3d && <div class="stars-bg" />}
@@ -36,7 +36,7 @@ const altPath = switchLocalePath(altLocale, currentPath);
   {!hideNav && (
     <nav class="site-nav">
       <div class="nav-inner">
-        <a href={localePath(locale, "/")} class="nav-logo">gargantua</a>
+        <a href={localePath(locale, "/")} class="nav-logo">Gravity Lensing</a>
         <div class="nav-links">
           <a href={localePath(locale, "/packages")}>{t.nav.packages}</a>
           <a href={localePath(locale, "/area51")}>{t.nav.area51}</a>
@@ -64,7 +64,7 @@ const altPath = switchLocalePath(altLocale, currentPath);
           <a href={localePath(locale, "/about")}>{t.about.label}</a>
           <a href={localePath(locale, "/faq")}>{t.faq.label}</a>
         </div>
-        <p class="footer-text">gargantua &mdash; {t.footer.description}</p>
+        <p class="footer-text">glensing &mdash; {t.footer.description}</p>
       </div>
     </footer>
   )}
