@@ -13,12 +13,12 @@ export const en = {
 
   // Top page
   top: {
-    tagline: "Common Lisp Package Registry",
+    tagline: "Common Lisp Package Registry & Scope",
     search: "Search packages...",
     stats: (count: number) => `${count} packages in orbit`,
     what: {
       title: "What is Gravity Lensing?",
-      desc: 'A package registry for Common Lisp. Packages orbit in glensing\'s gravitational field, ready to be pulled into your local environment via <strong>area51</strong>.',
+      desc: 'A package registry for Common Lisp. Browse and discover packages, then install them locally with <strong>area51</strong>.',
     },
     flow: {
       registry: "Package Registry",

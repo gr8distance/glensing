@@ -13,12 +13,12 @@ export const ja = {
 
   // Top page
   top: {
-    tagline: "Common Lisp パッケージレジストリ",
+    tagline: "Common Lisp Package Registry & Scope",
     search: "パッケージを検索...",
     stats: (count: number) => `${count} 個のパッケージが軌道上に`,
     what: {
       title: "Gravity Lensing とは？",
-      desc: 'Common Lisp のパッケージレジストリです。パッケージは glensing の重力場を周回し、<strong>area51</strong> を使ってローカル環境に取り込めます。',
+      desc: 'Common Lisp のパッケージレジストリです。パッケージを検索・閲覧し、<strong>area51</strong> でローカルにインストールできます。',
     },
     flow: {
       registry: "パッケージレジストリ",

@@ -69,7 +69,7 @@ export function AboutTemplate({ locale = "en" }: Props) {
           <p className="about-text">{t.about.openSource.desc}</p>
           <div className="about-links">
             <a
-              href="https://github.com/gargantua-dev/gargantua"
+              href="https://github.com/gr8distance/glensing"
               target="_blank"
               rel="noopener noreferrer"
               className="about-gh-link"
@@ -77,7 +77,7 @@ export function AboutTemplate({ locale = "en" }: Props) {
               {t.about.gargantuaRepo} &rarr;
             </a>
             <a
-              href="https://github.com/gargantua-dev/area51"
+              href="https://github.com/gr8distance/area51"
               target="_blank"
               rel="noopener noreferrer"
               className="about-gh-link"

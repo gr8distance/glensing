@@ -102,7 +102,7 @@ area51 test`}</code></pre>
         <section className="a51-section a51-links">
           <h2 className="a51-heading">{t.a51.source}</h2>
           <a
-            href="https://github.com/gargantua-dev/area51"
+            href="https://github.com/gr8distance/area51"
             target="_blank"
             rel="noopener noreferrer"
             className="a51-gh-link"

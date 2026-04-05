@@ -291,7 +291,6 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
       {/* Hero overlay */}
       <div ref={overlayRef} className={`top-overlay${overlayFaded ? " faded" : ""}`}>
         <div className="top-title">
-          <h1>Gravity Lensing</h1>
           <p className="top-tagline">{t.top.tagline}</p>
         </div>
 
