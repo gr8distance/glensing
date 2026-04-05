@@ -1,23 +1,33 @@
 ---
 import "../styles/global.css";
+import { useTranslations, localePath, switchLocalePath, type Locale } from "../i18n";
 
 interface Props {
   title: string;
   description?: string;
-  has3d?: boolean; // true for top page / search — skips CSS star bg
-  hideNav?: boolean; // true for top page — has its own overlay UI
-  hideFooter?: boolean; // true for top page — has its own footer
+  has3d?: boolean;
+  hideNav?: boolean;
+  hideFooter?: boolean;
+  locale?: Locale;
 }
 
-const { title, description = "Common Lisp Package Registry", has3d = false, hideNav = false, hideFooter = false } = Astro.props;
+const { title, description, has3d = false, hideNav = false, hideFooter = false, locale = "en" } = Astro.props;
+const t = useTranslations(locale);
+const defaultDesc = t.footer.description;
+const desc = description ?? defaultDesc;
+const currentPath = Astro.url.pathname;
+const altLocale = locale === "en" ? "ja" : "en";
+const altPath = switchLocalePath(altLocale, currentPath);
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={locale}>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content={description}>
+  <meta name="description" content={desc}>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate" hreflang={altLocale} href={altPath}>
   <title>{title} — gargantua</title>
 </head>
 <body>
@@ -26,11 +36,12 @@ const { title, description = "Common Lisp Package Registry", has3d = false, hide
   {!hideNav && (
     <nav class="site-nav">
       <div class="nav-inner">
-        <a href="/" class="nav-logo">gargantua</a>
+        <a href={localePath(locale, "/")} class="nav-logo">gargantua</a>
         <div class="nav-links">
-          <a href="/packages">Packages</a>
-          <a href="/area51">area51</a>
-          <a href="/docs">Docs</a>
+          <a href={localePath(locale, "/packages")}>{t.nav.packages}</a>
+          <a href={localePath(locale, "/area51")}>{t.nav.area51}</a>
+          <a href={localePath(locale, "/docs")}>{t.nav.docs}</a>
+          <a href={altPath} class="nav-lang">{t.langSwitch}</a>
         </div>
       </div>
     </nav>
@@ -41,8 +52,8 @@ const { title, description = "Common Lisp Package Registry", has3d = false, hide
   {!hideFooter && (
     <footer class="site-footer">
       <div class="container">
-        <p class="footer-text">gargantua &mdash; Common Lisp Package Registry</p>
-        <p class="footer-sub">Powered by <a href="/area51">area51</a></p>
+        <p class="footer-text">gargantua &mdash; {t.footer.description}</p>
+        <p class="footer-sub">{t.footer.powered} <a href={localePath(locale, "/area51")}>area51</a></p>
       </div>
     </footer>
   )}
@@ -95,6 +106,18 @@ const { title, description = "Common Lisp Package Registry", has3d = false, hide
 
   .nav-links a:hover {
     color: rgba(200, 180, 255, 0.9);
+  }
+
+  .nav-lang {
+    padding: 0.1rem 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.12em !important;
+  }
+
+  .nav-lang:hover {
+    border-color: rgba(200, 180, 255, 0.5);
   }
 
   .site-footer {

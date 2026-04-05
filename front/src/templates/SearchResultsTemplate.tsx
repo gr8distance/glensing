@@ -1,12 +1,14 @@
 import { useState, useMemo } from "react";
 import type { Package } from "../data/packages";
 import { PackageCard } from "../components/PackageCard";
+import { useTranslations, localePath, type Locale } from "../i18n";
 import "./SearchResultsTemplate.css";
 
 interface Props {
   query: string;
   results: Package[];
   allPackages: Package[];
+  locale?: Locale;
 }
 
 function filterPackages(packages: Package[], q: string): Package[] {
@@ -16,8 +18,9 @@ function filterPackages(packages: Package[], q: string): Package[] {
   );
 }
 
-export function SearchResultsTemplate({ query, results, allPackages }: Props) {
+export function SearchResultsTemplate({ query, results, allPackages, locale = "en" }: Props) {
   const [input, setInput] = useState(query);
+  const t = useTranslations(locale);
 
   const filtered = useMemo(
     () => (input === query ? results : filterPackages(allPackages, input)),
@@ -32,7 +35,8 @@ export function SearchResultsTemplate({ query, results, allPackages }: Props) {
     if (e.key === "Enter") {
       const params = new URLSearchParams();
       if (input) params.set("search", input);
-      window.location.href = `/packages${input ? `?${params}` : ""}`;
+      const base = localePath(locale, "/packages");
+      window.location.href = `${base}${input ? `?${params}` : ""}`;
     }
   };
 
@@ -43,7 +47,7 @@ export function SearchResultsTemplate({ query, results, allPackages }: Props) {
           <input
             type="text"
             className="search-input"
-            placeholder="Search packages..."
+            placeholder={t.search.placeholder}
             value={input}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
@@ -54,20 +58,18 @@ export function SearchResultsTemplate({ query, results, allPackages }: Props) {
         {filtered.length > 0 ? (
           <>
             <p className="search-count">
-              {filtered.length} package{filtered.length !== 1 ? "s" : ""} found
+              {t.search.count(filtered.length)}
             </p>
             <div className="search-grid">
               {filtered.map((pkg) => (
-                <PackageCard key={pkg.name} pkg={pkg} />
+                <PackageCard key={pkg.name} pkg={pkg} locale={locale} />
               ))}
             </div>
           </>
         ) : (
           <div className="search-empty">
-            <p className="search-empty-title">No packages found in orbit</p>
-            <p className="search-empty-hint">
-              Try a different search term or browse all packages
-            </p>
+            <p className="search-empty-title">{t.search.emptyTitle}</p>
+            <p className="search-empty-hint">{t.search.emptyHint}</p>
           </div>
         )}
       </div>

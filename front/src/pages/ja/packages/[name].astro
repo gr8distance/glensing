@@ -1,0 +1,16 @@
+---
+import SpaceLayout from "../../../layouts/SpaceLayout.astro";
+import { PackageDetailTemplate } from "../../../templates/PackageDetailTemplate";
+import { findPackage, PACKAGES } from "../../../data/packages";
+
+export function getStaticPaths() {
+  return PACKAGES.map((pkg) => ({ params: { name: pkg.name } }));
+}
+
+const pkg = findPackage(Astro.params.name!);
+if (!pkg) return Astro.redirect("/404");
+---
+
+<SpaceLayout title={pkg.name} locale="ja">
+  <PackageDetailTemplate pkg={pkg} locale="ja" client:load />
+</SpaceLayout>

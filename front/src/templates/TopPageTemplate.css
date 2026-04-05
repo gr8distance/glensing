@@ -295,6 +295,15 @@
   color: rgba(200, 180, 255, 0.9);
 }
 
+/* === Modal backdrop === */
+
+.top-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 19;
+  cursor: pointer;
+}
+
 /* === Package detail overlay === */
 
 .top-pkg-detail {

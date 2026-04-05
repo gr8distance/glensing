@@ -1,21 +1,26 @@
 import type { Package } from "../data/packages";
 import { InstallCommand } from "../components/InstallCommand";
 import { DependencyList } from "../components/DependencyList";
-import { PageLinks, LINK_AREA51, LINK_DOCS } from "../components/PageLinks";
+import { PageLinks, getLinks } from "../components/PageLinks";
+import { useTranslations, localePath, type Locale } from "../i18n";
 import "./PackageDetailTemplate.css";
 
 interface Props {
   pkg: Package;
+  locale?: Locale;
 }
 
-export function PackageDetailTemplate({ pkg }: Props) {
+export function PackageDetailTemplate({ pkg, locale = "en" }: Props) {
+  const t = useTranslations(locale);
+  const links = getLinks(locale);
+
   return (
     <main className="pkg-detail-page">
       <div className="container">
         <nav className="breadcrumb">
-          <a href="/">gargantua</a>
+          <a href={localePath(locale, "/")}>gargantua</a>
           <span className="breadcrumb-sep">/</span>
-          <a href="/packages">packages</a>
+          <a href={localePath(locale, "/packages")}>{t.nav.packages.toLowerCase()}</a>
           <span className="breadcrumb-sep">/</span>
           <span>{pkg.name}</span>
         </nav>
@@ -29,31 +34,31 @@ export function PackageDetailTemplate({ pkg }: Props) {
         </header>
 
         <section className="pkg-install">
-          <InstallCommand name={pkg.name} />
+          <InstallCommand name={pkg.name} locale={locale} />
         </section>
 
         <section className="pkg-usage">
-          <h2>Usage</h2>
-          <pre><code>{`;; area51 add updates your .asd automatically.
-;; Use the package in your code:
+          <h2>{t.pkg.usage}</h2>
+          <pre><code>{`${t.pkg.usageComment1}
+${t.pkg.usageComment2}
 (in-package :my-project)
 (${pkg.name}:some-function ...)`}</code></pre>
         </section>
 
         <div className="pkg-deps-grid">
-          <DependencyList title="Dependencies" deps={pkg.deps || []} />
-          <DependencyList title="Used by" deps={pkg.reverseDeps || []} />
+          <DependencyList title={t.pkg.deps} deps={pkg.deps || []} locale={locale} />
+          <DependencyList title={t.pkg.usedBy} deps={pkg.reverseDeps || []} locale={locale} />
         </div>
 
         {pkg.repo && (
           <section className="pkg-links">
-            <h2>Links</h2>
+            <h2>{t.pkg.links}</h2>
             <a href={pkg.repo} target="_blank" rel="noopener noreferrer" className="pkg-repo-link">
-              Source Repository &rarr;
+              {t.pkg.source} &rarr;
             </a>
           </section>
         )}
-        <PageLinks title="More" links={[LINK_AREA51, LINK_DOCS]} />
+        <PageLinks title={t.pageLinks.more} links={[links.LINK_AREA51, links.LINK_DOCS]} locale={locale} />
       </div>
     </main>
   );

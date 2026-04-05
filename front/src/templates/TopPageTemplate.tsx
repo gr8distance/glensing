@@ -1,13 +1,27 @@
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback, useMemo } from "react";
 import type { Package } from "../data/packages";
 import { initScene, type SceneAPI } from "../components/BlackHoleScene";
+import { useTranslations, localePath, type Locale } from "../i18n";
 import "./TopPageTemplate.css";
+
+const ORBIT_COUNT = 180;
+
+function pickRandom(allPkgs: Package[], count: number): Package[] {
+  const withDesc = allPkgs.filter((p) => p.desc);
+  const withoutDesc = allPkgs.filter((p) => !p.desc);
+  // Always include described packages, fill rest randomly
+  const shuffled = [...withoutDesc].sort(() => Math.random() - 0.5);
+  return [...withDesc, ...shuffled].slice(0, count);
+}
 
 interface Props {
   packages: Package[];
+  locale?: Locale;
 }
 
-export function TopPageTemplate({ packages }: Props) {
+export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props) {
+  const packages = useMemo(() => pickRandom(allPackages, ORBIT_COUNT), []);
+  const t = useTranslations(locale);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneAPIRef = useRef<SceneAPI | null>(null);
   const labelsRef = useRef<HTMLDivElement>(null);
@@ -37,11 +51,11 @@ export function TopPageTemplate({ packages }: Props) {
   // Copy button handler
   const handleCopy = useCallback((text: string, btn: HTMLButtonElement) => {
     navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = "Copied!";
+      btn.textContent = t.top.copied;
       btn.classList.add("copied");
-      setTimeout(() => { btn.textContent = "Copy"; btn.classList.remove("copied"); }, 1500);
+      setTimeout(() => { btn.textContent = t.top.copy; btn.classList.remove("copied"); }, 1500);
     });
-  }, []);
+  }, [t]);
 
   // Add copy buttons to pre elements
   useEffect(() => {
@@ -50,7 +64,7 @@ export function TopPageTemplate({ packages }: Props) {
         if (pre.querySelector(".copy-btn")) return;
         const btn = document.createElement("button");
         btn.className = "copy-btn";
-        btn.textContent = "Copy";
+        btn.textContent = t.top.copy;
         btn.addEventListener("click", (e) => {
           e.stopPropagation();
           const code = pre.querySelector("code")?.textContent || pre.textContent || "";
@@ -64,7 +78,7 @@ export function TopPageTemplate({ packages }: Props) {
     observer.observe(document.body, { childList: true, subtree: true });
     addCopyButtons();
     return () => observer.disconnect();
-  }, [handleCopy]);
+  }, [handleCopy, t]);
 
   // Scene initialization
   useEffect(() => {
@@ -83,7 +97,7 @@ export function TopPageTemplate({ packages }: Props) {
       },
       onHoverEarth(hovered, x, y) {
         if (hovered) {
-          setTooltip({ name: "Earth \u2014 area51", desc: "Click to explore the ground station", x: x + 16, y: y - 8 });
+          setTooltip({ name: t.top.tooltip.earth, desc: t.top.tooltip.earthDesc, x: x + 16, y: y - 8 });
         } else {
           setTooltip(null);
         }
@@ -203,6 +217,20 @@ export function TopPageTemplate({ packages }: Props) {
     setOverlayFaded(false);
   }
 
+  function closeAnyModal() {
+    if (pkgDetail) closePackageDetail();
+    if (area51DetailVisible) returnHome();
+  }
+
+  // Esc to close modals
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeAnyModal();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [pkgDetail, area51DetailVisible]);
+
   // Search
   function handleSearch(value: string) {
     setSearchQuery(value);
@@ -264,14 +292,14 @@ export function TopPageTemplate({ packages }: Props) {
       <div ref={overlayRef} className={`top-overlay${overlayFaded ? " faded" : ""}`}>
         <div className="top-title">
           <h1>gargantua</h1>
-          <p className="top-tagline">Common Lisp Package Registry</p>
+          <p className="top-tagline">{t.top.tagline}</p>
         </div>
 
         <div className="top-search-box">
           <input
             type="text"
             className="top-search-input"
-            placeholder="Search packages..."
+            placeholder={t.top.search}
             autoComplete="off"
             value={searchQuery}
             onChange={(e) => handleSearch(e.target.value)}
@@ -295,7 +323,7 @@ export function TopPageTemplate({ packages }: Props) {
         </div>
 
         <div className="top-stats">
-          <span>{packages.length} packages in orbit</span>
+          <span>{t.top.stats(allPackages.length)}</span>
         </div>
       </div>
 
@@ -321,15 +349,15 @@ export function TopPageTemplate({ packages }: Props) {
       <div className="top-content">
         <section>
           <div className="section-inner">
-            <h2>What is gargantua?</h2>
-            <p>A package registry for Common Lisp. Packages orbit in gargantua's gravitational field, ready to be pulled into your local environment via <strong>area51</strong>.</p>
+            <h2>{t.top.what.title}</h2>
+            <p dangerouslySetInnerHTML={{ __html: t.top.what.desc }} />
 
             <div className="flow-diagram">
               <div className="flow-node">
                 <span className="flow-icon bh">&#9679;</span>
                 <div>
                   <div className="flow-title">gargantua</div>
-                  <div className="flow-desc">Package Registry</div>
+                  <div className="flow-desc">{t.top.flow.registry}</div>
                 </div>
               </div>
               <div className="flow-arrow">&darr; <code>area51 add / install</code></div>
@@ -346,16 +374,16 @@ export function TopPageTemplate({ packages }: Props) {
 
         <section>
           <div className="section-inner">
-            <h2>Quick Start</h2>
+            <h2>{t.top.quickstart}</h2>
             <div className="code-block">
-              <pre><code><span className="c-comment"># Install area51</span>{"\n"}$ curl -fsSL https://gargantua.space/install.sh | sh{"\n"}{"\n"}<span className="c-comment"># Start a new project</span>{"\n"}$ area51 new my-project{"\n"}{"\n"}<span className="c-comment"># Add packages</span>{"\n"}$ area51 add alexandria cl-ppcre dexador{"\n"}{"\n"}<span className="c-comment"># Download dependencies</span>{"\n"}$ area51 install</code></pre>
+              <pre><code><span className="c-comment">{t.top.commentInstall}</span>{"\n"}$ curl -fsSL https://gargantua.space/install.sh | sh{"\n"}{"\n"}<span className="c-comment">{t.top.commentNew}</span>{"\n"}$ area51 new my-project{"\n"}{"\n"}<span className="c-comment">{t.top.commentAdd}</span>{"\n"}$ area51 add alexandria cl-ppcre dexador{"\n"}{"\n"}<span className="c-comment">{t.top.commentDownload}</span>{"\n"}$ area51 install</code></pre>
             </div>
           </div>
         </section>
 
         <section>
           <div className="section-inner">
-            <h2>Packages in Orbit</h2>
+            <h2>{t.top.packages}</h2>
             <div className="top-package-grid">
               {packages.map((p, i) => (
                 <div
@@ -374,19 +402,19 @@ export function TopPageTemplate({ packages }: Props) {
         <section className="top-explore">
           <div className="section-inner">
             <div className="page-links-grid" style={{maxWidth: 700, margin: "0 auto"}}>
-              <a href="/area51" className="page-link-card">
+              <a href={localePath(locale, "/area51")} className="page-link-card">
                 <span className="page-link-label">area51</span>
-                <span className="page-link-desc">The Common Lisp package manager</span>
+                <span className="page-link-desc">{t.top.link.area51.desc}</span>
                 <span className="page-link-arrow">&rarr;</span>
               </a>
-              <a href="/docs" className="page-link-card">
-                <span className="page-link-label">Documentation</span>
-                <span className="page-link-desc">Getting started guide</span>
+              <a href={localePath(locale, "/docs")} className="page-link-card">
+                <span className="page-link-label">{t.top.link.docs.label}</span>
+                <span className="page-link-desc">{t.top.link.docs.desc}</span>
                 <span className="page-link-arrow">&rarr;</span>
               </a>
-              <a href="/packages" className="page-link-card">
-                <span className="page-link-label">All Packages</span>
-                <span className="page-link-desc">Browse and search the registry</span>
+              <a href={localePath(locale, "/packages")} className="page-link-card">
+                <span className="page-link-label">{t.top.link.packages.label}</span>
+                <span className="page-link-desc">{t.top.link.packages.desc}</span>
                 <span className="page-link-arrow">&rarr;</span>
               </a>
             </div>
@@ -394,8 +422,8 @@ export function TopPageTemplate({ packages }: Props) {
         </section>
 
         <footer className="top-footer">
-          <p>gargantua &mdash; Common Lisp Package Registry</p>
-          <p className="footer-sub">Powered by <a href="/area51">area51</a></p>
+          <p>gargantua &mdash; {t.top.tagline}</p>
+          <p className="footer-sub">{t.footer.powered} <a href={localePath(locale, "/area51")}>area51</a></p>
         </footer>
       </div>
 
@@ -460,6 +488,11 @@ export function TopPageTemplate({ packages }: Props) {
         })}
       </div>
 
+      {/* Modal backdrop */}
+      {(pkgDetail || area51DetailVisible) && (
+        <div className="top-modal-backdrop" onClick={closeAnyModal} />
+      )}
+
       {/* Package detail overlay */}
       <div className={`top-pkg-detail${pkgDetail ? " visible" : ""}`}>
         <button
@@ -476,12 +509,12 @@ export function TopPageTemplate({ packages }: Props) {
             <h2>{pkgDetail.pkg.name}</h2>
             <p className="pd-desc">{pkgDetail.pkg.desc}</p>
             <div className="pd-section">
-              <h3>Add to project</h3>
+              <h3>{t.top.pkg.add}</h3>
               <pre><code>$ area51 add {pkgDetail.pkg.name}</code></pre>
-              <p className="pd-note">Updates area51.lisp and .asd automatically.</p>
+              <p className="pd-note">{t.top.pkg.note}</p>
             </div>
             <div className="pd-section">
-              <h3>Install</h3>
+              <h3>{t.top.pkg.install}</h3>
               <pre><code>$ area51 install</code></pre>
             </div>
           </div>
@@ -500,38 +533,38 @@ export function TopPageTemplate({ packages }: Props) {
           &times;
         </button>
         <h2>area51</h2>
-        <p className="a51-subtitle">Common Lisp Package Manager</p>
+        <p className="a51-subtitle">{t.top.a51.subtitle}</p>
 
         <div className="a51-section">
-          <h3>Add a package</h3>
+          <h3>{t.top.a51.add}</h3>
           <pre><code>$ area51 add alexandria</code></pre>
-          <p>Packages are fetched from <strong>gargantua</strong> and installed to your local machine.</p>
+          <p dangerouslySetInnerHTML={{ __html: t.top.a51.addDesc }} />
         </div>
 
         <div className="a51-section">
-          <h3>How it works</h3>
+          <h3>{t.top.a51.how}</h3>
           <div className="a51-flow">
             <div className="a51-node">
               <span className="a51-node-icon">&#9679;</span>
               <span>gargantua</span>
-              <span className="a51-node-desc">Registry (space)</span>
+              <span className="a51-node-desc">{t.top.a51.registry}</span>
             </div>
             <div className="a51-arrow">&darr;</div>
             <div className="a51-node">
               <span className="a51-node-icon">&#9651;</span>
               <span>area51</span>
-              <span className="a51-node-desc">Your machine (earth)</span>
+              <span className="a51-node-desc">{t.top.a51.local}</span>
             </div>
           </div>
         </div>
 
         <div className="a51-section">
-          <h3>Quick Start</h3>
+          <h3>{t.top.a51.quickstart}</h3>
           <pre><code>{`$ curl -fsSL https://gargantua.space/install.sh | sh\n$ area51 new my-project\n$ area51 add cl-ppcre dexador\n$ area51 install`}</code></pre>
         </div>
 
         <div className="a51-section">
-          <h3>Config</h3>
+          <h3>{t.top.a51.config}</h3>
           <pre><code>{`~/.area51/\n  \u251C\u2500\u2500 packages/      # downloaded packages\n  \u2514\u2500\u2500 quicklisp/     # cached index`}</code></pre>
         </div>
       </div>

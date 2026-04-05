@@ -50,8 +50,11 @@ export function initScene(
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 2000);
 
-  // Camera state
-  const CAM_HOME = { pos: new THREE.Vector3(0, 2, 8), target: new THREE.Vector3(0, 0, 0) };
+  // Camera state — pull back on portrait screens so the BH fits
+  const isPortrait = window.innerWidth < window.innerHeight;
+  const camZ = isPortrait ? 11 : 8;
+  const camY = isPortrait ? 0.5 : 2;
+  const CAM_HOME = { pos: new THREE.Vector3(0, camY, camZ), target: new THREE.Vector3(0, 0, 0) };
   const camState = {
     pos: CAM_HOME.pos.clone(),
     target: CAM_HOME.target.clone(),
@@ -65,9 +68,12 @@ export function initScene(
   // Post-processing: bloom
   const composer = new EffectComposer(renderer);
   composer.addPass(new RenderPass(scene, camera));
+  const bloomScale = 0.5;
   const bloom = new UnrealBloomPass(
-    new THREE.Vector2(window.innerWidth, window.innerHeight),
-    1.0, 0.45, 0.35
+    new THREE.Vector2(window.innerWidth * bloomScale, window.innerHeight * bloomScale),
+    isPortrait ? 0.6 : 1.0,
+    isPortrait ? 0.3 : 0.45,
+    0.35
   );
   composer.addPass(bloom);
 
@@ -78,6 +84,7 @@ export function initScene(
       uBhScreen: { value: new THREE.Vector2(0.5, 0.45) },
       uStrength: { value: 1.0 },
       uRadius: { value: 0.35 },
+      uAspect: { value: window.innerWidth / window.innerHeight },
     },
     vertexShader: `
       varying vec2 vUv;
@@ -88,12 +95,12 @@ export function initScene(
       uniform vec2 uBhScreen;
       uniform float uStrength;
       uniform float uRadius;
+      uniform float uAspect;
       varying vec2 vUv;
 
       void main() {
         vec2 delta = vUv - uBhScreen;
-        float aspect = 1.0;
-        delta.x *= aspect;
+        delta.x *= uAspect;
         float dist = length(delta);
 
         float normalizedDist = dist / uRadius;
@@ -105,14 +112,19 @@ export function initScene(
           float deflection = uStrength * 0.02 / (normalizedDist * normalizedDist + 0.2);
 
           vec2 dir = normalize(delta);
-          vec2 warpedUv = vUv + dir * deflection;
+          // Undo aspect correction for UV offset
+          vec2 uvDir = dir;
+          uvDir.x /= uAspect;
+          vec2 warpedUv = vUv + uvDir * deflection;
 
           float ringDist = abs(normalizedDist - 0.25);
           float ringStrength = exp(-ringDist * ringDist * 150.0) * 0.4;
 
           vec4 mainColor = texture2D(tDiffuse, warpedUv);
 
-          vec2 ringUv = uBhScreen - delta * 0.35;
+          vec2 ringDelta = delta;
+          ringDelta.x /= uAspect;
+          vec2 ringUv = uBhScreen - ringDelta * 0.35;
           vec4 ringColor = texture2D(tDiffuse, ringUv);
 
           gl_FragColor = mix(mainColor, mainColor + ringColor * 0.2, ringStrength);
@@ -201,7 +213,7 @@ export function initScene(
 
     return { points: new THREE.Points(geo, starMat), material: starMat };
   }
-  const starField = createStarField(5000);
+  const starField = createStarField(6666);
   scene.add(starField.points);
 
   // ---------------------------------------------------------------------------
@@ -924,10 +936,33 @@ export function initScene(
   // ---------------------------------------------------------------------------
   const clock = new THREE.Clock();
   let animFrameId: number;
+  let paused = false;
+  let throttled = false;
+  let frameCount = 0;
+
+  // Pause when tab is hidden
+  const handleVisibility = () => {
+    if (document.hidden) {
+      paused = true;
+      clock.stop();
+    } else {
+      paused = false;
+      clock.start();
+      animFrameId = requestAnimationFrame(animate);
+    }
+  };
+  document.addEventListener("visibilitychange", handleVisibility);
 
   function animate() {
+    if (paused) return;
     animFrameId = requestAnimationFrame(animate);
-    const t = clock.getElapsedTime();
+
+    // Throttle to ~15fps when scrolled past the canvas
+    frameCount++;
+    if (throttled && frameCount % 4 !== 0) return;
+
+    const dt = Math.min(clock.getDelta(), 0.1); // cap to avoid jumps after tab switch
+    const t = clock.elapsedTime;
 
     // Background
     starField.material.uniforms.uTime.value = t;
@@ -974,9 +1009,9 @@ export function initScene(
 
     for (let i = 0; i < TOTAL; i++) {
       const s = particleState[i];
-      s.angle += s.speed * 0.016;
+      s.angle += s.speed * dt;
       if (!isZoomed) {
-        s.radius += s.drift * 0.5;
+        s.radius += s.drift * dt * 30;
       }
 
       const minR = s.isPackage ? 0.8 : 1.5;
@@ -998,9 +1033,9 @@ export function initScene(
         const dist = Math.sqrt(dx * dx + dy * dy + dz * dz);
         if (dist < mouseGravityRadius && dist > 0.1) {
           const force = mouseGravityStrength / (dist * dist + 0.5);
-          px += dx * force * 0.016;
-          py += dy * force * 0.016;
-          pz += dz * force * 0.016;
+          px += dx * force * dt;
+          py += dy * force * dt;
+          pz += dz * force * dt;
         }
       }
 
@@ -1125,11 +1160,19 @@ export function initScene(
   // Resize
   // ---------------------------------------------------------------------------
   const handleResize = () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    composer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(w, h);
+    composer.setSize(w, h);
     pkgMat.uniforms.uPixelRatio.value = renderer.getPixelRatio();
+    lensingPass.uniforms.uAspect.value = w / h;
+
+    // Adjust bloom for small screens
+    const isPortrait = w < h;
+    bloom.strength = isPortrait ? 0.6 : 1.0;
+    bloom.radius = isPortrait ? 0.3 : 0.45;
   };
   window.addEventListener("resize", handleResize);
 
@@ -1137,7 +1180,9 @@ export function initScene(
   // Cleanup
   // ---------------------------------------------------------------------------
   function cleanup() {
+    paused = true;
     cancelAnimationFrame(animFrameId);
+    document.removeEventListener("visibilitychange", handleVisibility);
     window.removeEventListener("resize", handleResize);
     canvas.removeEventListener("mousemove", handleMouseMove);
     canvas.removeEventListener("click", handleClick);
@@ -1182,6 +1227,8 @@ export function initScene(
     },
     setScrollProgress(progress: number) {
       scrollProgress = progress;
+      // Throttle rendering when canvas is mostly scrolled out of view
+      throttled = progress > 0.8;
     },
     getPkgCount() {
       return PKG_COUNT;
