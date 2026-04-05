@@ -42,10 +42,10 @@ export const ja = {
     a51: {
       subtitle: "Common Lisp パッケージマネージャ",
       add: "パッケージを追加",
-      addDesc: "パッケージは <strong>gargantua</strong> から取得され、ローカルマシンにインストールされます。",
+      addDesc: "<strong>gargantua</strong> から取得してローカルにインストールします。",
       how: "仕組み",
-      registry: "レジストリ（宇宙）",
-      local: "あなたのマシン（地球）",
+      registry: "レジストリ",
+      local: "あなたのマシン",
       quickstart: "クイックスタート",
       config: "設定",
     },
@@ -84,22 +84,21 @@ export const ja = {
     subtitle: "Common Lisp パッケージマネージャ",
     what: {
       title: "area51 とは？",
-      desc: "area51 は Common Lisp における Bundler（Ruby）、Cargo（Rust）、npm（JavaScript）に相当するツールです。プロジェクトの依存関係を解決・管理し、バージョンをロックして再現可能なビルドを保証します。必要なものを宣言すれば、あとは area51 におまかせ \u2014 ランタイムに Quicklisp は不要です。",
+      desc: "Common Lisp 用のパッケージマネージャです。Ruby の Bundler、Rust の Cargo、JavaScript の npm に相当します。依存関係の解決、バージョンのロック、再現可能なビルドを実現します。",
     },
     how: "仕組み",
-    registry: "レジストリ / 宇宙",
+    registry: "レジストリ",
     local: "あなたのマシン",
-    earth: "地球",
     installation: "インストール",
-    commands: "基本コマンド",
+    commands: "コマンド",
     cmd: {
-      newDesc: "area51.lisp と .asd を含む新しいプロジェクトを作成。",
-      addDesc: "area51.lisp と .asd に依存関係を追加。",
+      newDesc: "新しいプロジェクトを作成。",
+      addDesc: "依存関係を追加。",
       installDesc: "すべての依存関係を解決しダウンロード。",
-      buildDesc: "バイナリのビルド、プロジェクトの実行、テストの実行。",
+      buildDesc: "ビルド、実行、テスト。",
     },
     config: "設定",
-    configDesc: "area51 は設定とキャッシュを以下に保存します：",
+    configDesc: "area51 はキャッシュを以下に保存します：",
     source: "ソースコード",
     github: "GitHub で見る",
   },
@@ -168,6 +167,80 @@ export const ja = {
       cleanDesc: "パッケージキャッシュ (~/.area51/) をクリア",
       upgradeDesc: "area51 自体を最新バージョンに更新",
     },
+  },
+
+  // About page
+  about: {
+    label: "概要",
+    title: "gargantua について",
+    subtitle: "Common Lisp のパッケージレジストリとエコシステム。",
+    whatGargantua: {
+      title: "gargantua とは？",
+      desc: "gargantua は Common Lisp のパッケージレジストリです。Quicklisp エコシステムのパッケージをインデックスし、検索・閲覧可能なインターフェースで提供します。Common Lisp ライブラリが軌道を周回する中央ハブであり、あなたのプロジェクトに取り込む準備ができています。",
+    },
+    whatArea51: {
+      title: "area51 とは？",
+      desc: "area51 は Common Lisp のコマンドラインパッケージマネージャです。依存関係の解決、バージョンのロック、プロジェクトのパッケージをローカルで管理します。gargantua が空のレジストリなら、area51 はあなたのマシン上の地上局です。",
+    },
+    relationship: {
+      title: "連携の仕組み",
+      desc: "gargantua はパッケージをホスティングしインデックスします。area51 は gargantua に問い合わせてパッケージを検索、ダウンロード、管理します。gargantua で検索・閲覧し、area51 でインストール・ビルドします。",
+      registry: "パッケージレジストリ",
+      cli: "CLI パッケージマネージャ",
+      browse: "閲覧・検索",
+      install: "インストール・管理",
+    },
+    name: {
+      title: "なぜ「gargantua」？",
+      desc: "「gargantua」は映画「インターステラー」に登場する超大質量ブラックホールの名前です。多くの言語に影響を与えた Lisp はまるで gargantua の重力のようです。偉大な Lisp エイリアンが作り出した素晴らしいパッケージは Lisp の重力圏を周回し、あなたのプロジェクトに取り込まれるのを待っています。",
+    },
+    openSource: {
+      title: "オープンソース",
+      desc: "gargantua と area51 はどちらもオープンソースです。パッケージデータは Quicklisp から取得しています。コントリビューション歓迎です。",
+    },
+    gargantuaRepo: "gargantua を GitHub で見る",
+    area51Repo: "area51 を GitHub で見る",
+  },
+
+  // FAQ page
+  faq: {
+    label: "FAQ",
+    title: "よくある質問",
+    subtitle: "gargantua と area51 に関するよくある質問。",
+    items: [
+      {
+        q: "gargantua とは何ですか？",
+        a: "gargantua は Common Lisp のパッケージレジストリです。Common Lisp ライブラリを検索できる Web インターフェースを提供し、パッケージの詳細、依存関係、使用方法の情報を掲載しています。",
+      },
+      {
+        q: "area51 とは何ですか？",
+        a: "area51 は Common Lisp のパッケージマネージャ CLI です。依存関係の解決、バージョンのロック、再現可能なビルドを実現します。",
+      },
+      {
+        q: "area51 のインストール方法は？",
+        a: "ターミナルで以下のコマンドを実行してください：\ncurl -fsSL https://gargantua.dev/install.sh | sh",
+      },
+      {
+        q: "パッケージの追加方法は？",
+        a: "add コマンドを使います：\narea51 add <パッケージ名>\narea51.lisp マニフェストと .asd システム定義が自動で更新されます。",
+      },
+      {
+        q: "パッケージはどこに保存されますか？",
+        a: "ダウンロードされたパッケージは ~/.area51/packages/ にキャッシュされます。Quicklisp インデックスは ~/.area51/quicklisp/ にキャッシュされ、24時間ごとに更新されます。",
+      },
+      {
+        q: "Quicklisp は必要ですか？",
+        a: "いいえ。area51 はスタンドアロンのパッケージマネージャです。パッケージメタデータを gargantua から取得し、ソースを直接ダウンロードします。Quicklisp のインストールは不要です。",
+      },
+      {
+        q: "パッケージの公開方法は？",
+        a: "パッケージの公開機能は近日公開予定です。現在、gargantua は Quicklisp ディストリビューションからパッケージをインデックスしています。直接公開のサポートをお待ちください。",
+      },
+      {
+        q: "gargantua は無料ですか？",
+        a: "はい。gargantua と area51 はどちらも無料のオープンソースソフトウェアです。",
+      },
+    ],
   },
 
   // PageLinks

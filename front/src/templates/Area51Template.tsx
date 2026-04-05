@@ -45,7 +45,6 @@ export function Area51Template({ locale = "en" }: Props) {
             <div className="a51-node a51-node--local">
               <span className="a51-node-icon">&#x1F30D;</span>
               <span className="a51-node-label">{t.a51.local}</span>
-              <span className="a51-node-desc">{t.a51.earth}</span>
             </div>
           </div>
         </section>

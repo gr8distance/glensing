@@ -42,10 +42,10 @@ export const en = {
     a51: {
       subtitle: "Common Lisp Package Manager",
       add: "Add a package",
-      addDesc: "Packages are fetched from <strong>gargantua</strong> and installed to your local machine.",
+      addDesc: "Packages are fetched from <strong>gargantua</strong> and installed locally.",
       how: "How it works",
-      registry: "Registry (space)",
-      local: "Your machine (earth)",
+      registry: "Registry",
+      local: "Your machine",
       quickstart: "Quick Start",
       config: "Config",
     },
@@ -84,22 +84,21 @@ export const en = {
     subtitle: "Common Lisp Package Manager",
     what: {
       title: "What is area51?",
-      desc: "area51 is to Common Lisp what Bundler is to Ruby, Cargo to Rust, and npm to JavaScript. It resolves and manages your project dependencies, locking versions and ensuring reproducible builds across machines. Declare what you need and let area51 handle the rest \u2014 no Quicklisp required at runtime.",
+      desc: "area51 is a package manager for Common Lisp \u2014 like Bundler for Ruby, Cargo for Rust, or npm for JavaScript. It resolves dependencies, locks versions, and ensures reproducible builds. Declare what you need; area51 handles the rest.",
     },
     how: "How it works",
-    registry: "registry / space",
+    registry: "registry",
     local: "your machine",
-    earth: "earth",
     installation: "Installation",
-    commands: "Basic commands",
+    commands: "Commands",
     cmd: {
-      newDesc: "Scaffold a new project with area51.lisp and .asd.",
-      addDesc: "Add a dependency to area51.lisp and .asd.",
+      newDesc: "Create a new project with area51.lisp and .asd.",
+      addDesc: "Add a dependency.",
       installDesc: "Resolve and download all dependencies.",
-      buildDesc: "Build a binary, run the project, or execute tests.",
+      buildDesc: "Build, run, or test your project.",
     },
     config: "Configuration",
-    configDesc: "area51 stores its configuration and cache under",
+    configDesc: "area51 stores its cache under",
     source: "Source",
     github: "View on GitHub",
   },
@@ -168,6 +167,80 @@ export const en = {
       cleanDesc: "Clear the package cache (~/.area51/)",
       upgradeDesc: "Update area51 itself to the latest version",
     },
+  },
+
+  // About page
+  about: {
+    label: "About",
+    title: "About gargantua",
+    subtitle: "A package registry and ecosystem for Common Lisp.",
+    whatGargantua: {
+      title: "What is gargantua?",
+      desc: "gargantua is a package registry for Common Lisp. It indexes packages from the Quicklisp ecosystem and presents them in a searchable, browsable interface. Think of it as the central hub where Common Lisp libraries orbit, ready to be discovered and pulled into your projects.",
+    },
+    whatArea51: {
+      title: "What is area51?",
+      desc: "area51 is a command-line package manager for Common Lisp. It resolves dependencies, locks versions, and manages your project's packages locally. If gargantua is the registry in the sky, area51 is the ground station on your machine.",
+    },
+    relationship: {
+      title: "How they work together",
+      desc: "gargantua hosts and indexes packages. area51 queries gargantua to find, download, and manage them on your machine. You search and browse on gargantua; you install and build with area51.",
+      registry: "Package Registry",
+      cli: "CLI Package Manager",
+      browse: "Browse & search",
+      install: "Install & manage",
+    },
+    name: {
+      title: "Why \"gargantua\"?",
+      desc: "The name comes from the supermassive black hole in the film Interstellar. Lisp, which has influenced so many languages, is like the gravity of gargantua. The wonderful packages created by the great Lisp aliens orbit in Lisp's gravitational field, waiting to be pulled into your projects.",
+    },
+    openSource: {
+      title: "Open source",
+      desc: "Both gargantua and area51 are open source. Package data is sourced from Quicklisp. Contributions are welcome.",
+    },
+    gargantuaRepo: "gargantua on GitHub",
+    area51Repo: "area51 on GitHub",
+  },
+
+  // FAQ page
+  faq: {
+    label: "FAQ",
+    title: "Frequently Asked Questions",
+    subtitle: "Common questions about gargantua and area51.",
+    items: [
+      {
+        q: "What is gargantua?",
+        a: "gargantua is a package registry for Common Lisp. It provides a searchable web interface for discovering Common Lisp libraries, with package details, dependencies, and usage information.",
+      },
+      {
+        q: "What is area51?",
+        a: "area51 is a package manager CLI for Common Lisp. It handles dependency resolution, version locking, and reproducible builds for your projects.",
+      },
+      {
+        q: "How do I install area51?",
+        a: "Run the following command in your terminal:\ncurl -fsSL https://gargantua.dev/install.sh | sh",
+      },
+      {
+        q: "How do I add a package?",
+        a: "Use the add command:\narea51 add <package-name>\nThis updates both your area51.lisp manifest and .asd system definition automatically.",
+      },
+      {
+        q: "Where are packages stored?",
+        a: "Downloaded packages are cached in ~/.area51/packages/. The Quicklisp index is cached in ~/.area51/quicklisp/ and refreshed every 24 hours.",
+      },
+      {
+        q: "Is Quicklisp required?",
+        a: "No. area51 is a standalone package manager. It fetches package metadata from gargantua and downloads sources directly. You do not need Quicklisp installed.",
+      },
+      {
+        q: "How do I publish a package?",
+        a: "Package publishing is coming soon. Currently, gargantua indexes packages from the Quicklisp distribution. Stay tuned for direct publishing support.",
+      },
+      {
+        q: "Is gargantua free?",
+        a: "Yes. Both gargantua and area51 are free and open source software.",
+      },
+    ],
   },
 
   // PageLinks

@@ -302,6 +302,9 @@
   inset: 0;
   z-index: 19;
   cursor: pointer;
+  background: rgba(3, 2, 10, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }
 
 /* === Package detail overlay === */

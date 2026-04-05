@@ -484,7 +484,7 @@ export function initScene(
     const angle = Math.random() * Math.PI * 2;
     const radius = isPackage ? 4.0 + Math.random() * 8.0 : 5.0 + Math.random() * 15.0;
     const y = (Math.random() - 0.5) * (isPackage ? 2.0 : 8.0);
-    const speed = isPackage ? 0.15 + Math.random() * 0.25 : 0.02 + Math.random() * 0.08;
+    const speed = isPackage ? 0.10 + Math.random() * 0.165 : 0.013 + Math.random() * 0.053;
     const drift = isPackage ? -0.008 - Math.random() * 0.015 : -0.001 - Math.random() * 0.003;
     particleState[i] = { angle, radius, y, speed, drift, isPackage, baseRadius: radius };
 

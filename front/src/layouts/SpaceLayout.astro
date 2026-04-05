@@ -41,7 +41,12 @@ const altPath = switchLocalePath(altLocale, currentPath);
           <a href={localePath(locale, "/packages")}>{t.nav.packages}</a>
           <a href={localePath(locale, "/area51")}>{t.nav.area51}</a>
           <a href={localePath(locale, "/docs")}>{t.nav.docs}</a>
-          <a href={altPath} class="nav-lang">{t.langSwitch}</a>
+          <div class="nav-lang-wrap">
+            <select class="nav-lang-select" onchange="window.location.href=this.value">
+              <option value={switchLocalePath("en", currentPath)} selected={locale === "en"}>EN</option>
+              <option value={switchLocalePath("ja", currentPath)} selected={locale === "ja"}>日本語</option>
+            </select>
+          </div>
         </div>
       </div>
     </nav>
@@ -52,8 +57,14 @@ const altPath = switchLocalePath(altLocale, currentPath);
   {!hideFooter && (
     <footer class="site-footer">
       <div class="container">
+        <div class="footer-links">
+          <a href={localePath(locale, "/packages")}>{t.nav.packages}</a>
+          <a href={localePath(locale, "/docs")}>{t.nav.docs}</a>
+          <a href={localePath(locale, "/area51")}>area51</a>
+          <a href={localePath(locale, "/about")}>{t.about.label}</a>
+          <a href={localePath(locale, "/faq")}>{t.faq.label}</a>
+        </div>
         <p class="footer-text">gargantua &mdash; {t.footer.description}</p>
-        <p class="footer-sub">{t.footer.powered} <a href={localePath(locale, "/area51")}>area51</a></p>
       </div>
     </footer>
   )}
@@ -94,6 +105,7 @@ const altPath = switchLocalePath(altLocale, currentPath);
 
   .nav-links {
     display: flex;
+    align-items: center;
     gap: 1.5rem;
   }
 
@@ -108,16 +120,38 @@ const altPath = switchLocalePath(altLocale, currentPath);
     color: rgba(200, 180, 255, 0.9);
   }
 
-  .nav-lang {
-    padding: 0.1rem 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 3px;
-    font-size: 0.65rem !important;
-    letter-spacing: 0.12em !important;
+  .nav-lang-wrap {
+    display: flex;
+    align-items: center;
   }
 
-  .nav-lang:hover {
+  .nav-lang-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 3px;
+    color: rgba(255, 255, 255, 0.45);
+    font-family: inherit;
+    font-size: 0.65rem;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    padding: 0.25rem 1.4rem 0.25rem 0.5rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(255,255,255,0.3)'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.4rem center;
+  }
+
+  .nav-lang-select:hover {
     border-color: rgba(200, 180, 255, 0.5);
+    color: rgba(200, 180, 255, 0.9);
+  }
+
+  .nav-lang-select option {
+    background: #0a0816;
+    color: #ddd;
   }
 
   .site-footer {
@@ -132,9 +166,21 @@ const altPath = switchLocalePath(altLocale, currentPath);
     letter-spacing: 0.1em;
   }
 
-  .footer-sub {
-    font-size: 0.7rem;
-    color: rgba(80, 200, 255, 0.3);
-    margin-top: 0.3rem;
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-links a {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.4);
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover {
+    color: rgba(200, 180, 255, 0.9);
   }
 </style>
