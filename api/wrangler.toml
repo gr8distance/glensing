@@ -1,0 +1,8 @@
+name = "gargantua-api"
+main = "src/index.ts"
+compatibility_date = "2025-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "gargantua-db"
+database_id = "local"

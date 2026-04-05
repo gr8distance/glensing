@@ -1,0 +1,25 @@
+{
+  "name": "gargantua-api",
+  "module": "src/index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute gargantua-db --local --file=src/db/schema.sql",
+    "db:seed": "wrangler d1 execute gargantua-db --local --file=src/db/seed.sql",
+    "db:reset": "bun run db:init && bun run db:seed"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "wrangler": "^4.80.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@hono/zod-openapi": "^1.2.4",
+    "hono": "^4.12.10",
+    "zod": "^4.3.6"
+  }
+}
