@@ -1,6 +1,7 @@
 import type { Package } from "../data/packages";
 import { InstallCommand } from "../components/InstallCommand";
 import { DependencyList } from "../components/DependencyList";
+import { PageLinks, LINK_AREA51, LINK_DOCS } from "../components/PageLinks";
 import "./PackageDetailTemplate.css";
 
 interface Props {
@@ -11,6 +12,13 @@ export function PackageDetailTemplate({ pkg }: Props) {
   return (
     <main className="pkg-detail-page">
       <div className="container">
+        <nav className="breadcrumb">
+          <a href="/">gargantua</a>
+          <span className="breadcrumb-sep">/</span>
+          <a href="/packages">packages</a>
+          <span className="breadcrumb-sep">/</span>
+          <span>{pkg.name}</span>
+        </nav>
         <header className="pkg-header">
           <h1 className="pkg-title">{pkg.name}</h1>
           <div className="pkg-meta-row">
@@ -26,12 +34,10 @@ export function PackageDetailTemplate({ pkg }: Props) {
 
         <section className="pkg-usage">
           <h2>Usage</h2>
-          <pre><code>{`;; Add to your system definition
-(defsystem "my-project"
-  :depends-on ("${pkg.name}"))
-
-;; Or load interactively
-(ql:quickload "${pkg.name}")`}</code></pre>
+          <pre><code>{`;; area51 add updates your .asd automatically.
+;; Use the package in your code:
+(in-package :my-project)
+(${pkg.name}:some-function ...)`}</code></pre>
         </section>
 
         <div className="pkg-deps-grid">
@@ -47,6 +53,7 @@ export function PackageDetailTemplate({ pkg }: Props) {
             </a>
           </section>
         )}
+        <PageLinks title="More" links={[LINK_AREA51, LINK_DOCS]} />
       </div>
     </main>
   );

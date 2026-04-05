@@ -332,7 +332,7 @@ export function TopPageTemplate({ packages }: Props) {
                   <div className="flow-desc">Package Registry</div>
                 </div>
               </div>
-              <div className="flow-arrow">&darr; <code>area51 install</code></div>
+              <div className="flow-arrow">&darr; <code>area51 add / install</code></div>
               <div className="flow-node">
                 <span className="flow-icon earth">&#9679;</span>
                 <div>
@@ -348,7 +348,7 @@ export function TopPageTemplate({ packages }: Props) {
           <div className="section-inner">
             <h2>Quick Start</h2>
             <div className="code-block">
-              <pre><code><span className="c-comment"># Install area51</span>{"\n"}$ curl -fsSL https://gargantua.space/install.sh | sh{"\n"}{"\n"}<span className="c-comment"># Start a new project</span>{"\n"}$ area51 init my-project{"\n"}{"\n"}<span className="c-comment"># Add packages from gargantua</span>{"\n"}$ area51 install alexandria cl-ppcre dexador</code></pre>
+              <pre><code><span className="c-comment"># Install area51</span>{"\n"}$ curl -fsSL https://gargantua.space/install.sh | sh{"\n"}{"\n"}<span className="c-comment"># Start a new project</span>{"\n"}$ area51 new my-project{"\n"}{"\n"}<span className="c-comment"># Add packages</span>{"\n"}$ area51 add alexandria cl-ppcre dexador{"\n"}{"\n"}<span className="c-comment"># Download dependencies</span>{"\n"}$ area51 install</code></pre>
             </div>
           </div>
         </section>
@@ -371,9 +371,31 @@ export function TopPageTemplate({ packages }: Props) {
           </div>
         </section>
 
+        <section className="top-explore">
+          <div className="section-inner">
+            <div className="page-links-grid" style={{maxWidth: 700, margin: "0 auto"}}>
+              <a href="/area51" className="page-link-card">
+                <span className="page-link-label">area51</span>
+                <span className="page-link-desc">The Common Lisp package manager</span>
+                <span className="page-link-arrow">&rarr;</span>
+              </a>
+              <a href="/docs" className="page-link-card">
+                <span className="page-link-label">Documentation</span>
+                <span className="page-link-desc">Getting started guide</span>
+                <span className="page-link-arrow">&rarr;</span>
+              </a>
+              <a href="/packages" className="page-link-card">
+                <span className="page-link-label">All Packages</span>
+                <span className="page-link-desc">Browse and search the registry</span>
+                <span className="page-link-arrow">&rarr;</span>
+              </a>
+            </div>
+          </div>
+        </section>
+
         <footer className="top-footer">
           <p>gargantua &mdash; Common Lisp Package Registry</p>
-          <p className="footer-sub">Powered by area51</p>
+          <p className="footer-sub">Powered by <a href="/area51">area51</a></p>
         </footer>
       </div>
 
@@ -454,16 +476,13 @@ export function TopPageTemplate({ packages }: Props) {
             <h2>{pkgDetail.pkg.name}</h2>
             <p className="pd-desc">{pkgDetail.pkg.desc}</p>
             <div className="pd-section">
-              <h3>Install</h3>
-              <pre><code>$ area51 install {pkgDetail.pkg.name}</code></pre>
-            </div>
-            <div className="pd-section">
               <h3>Add to project</h3>
-              <pre><code>{`;; area51.asd\n(defsystem "my-project"\n  :depends-on ("${pkgDetail.pkg.name}"))`}</code></pre>
+              <pre><code>$ area51 add {pkgDetail.pkg.name}</code></pre>
+              <p className="pd-note">Updates area51.lisp and .asd automatically.</p>
             </div>
             <div className="pd-section">
-              <h3>Use</h3>
-              <pre><code>{`(ql:quickload "${pkgDetail.pkg.name}")`}</code></pre>
+              <h3>Install</h3>
+              <pre><code>$ area51 install</code></pre>
             </div>
           </div>
         )}
@@ -484,8 +503,8 @@ export function TopPageTemplate({ packages }: Props) {
         <p className="a51-subtitle">Common Lisp Package Manager</p>
 
         <div className="a51-section">
-          <h3>Install</h3>
-          <pre><code>$ area51 install alexandria</code></pre>
+          <h3>Add a package</h3>
+          <pre><code>$ area51 add alexandria</code></pre>
           <p>Packages are fetched from <strong>gargantua</strong> and installed to your local machine.</p>
         </div>
 
@@ -508,12 +527,12 @@ export function TopPageTemplate({ packages }: Props) {
 
         <div className="a51-section">
           <h3>Quick Start</h3>
-          <pre><code>{`$ curl -fsSL https://gargantua.space/install.sh | sh\n$ area51 init my-project\n$ area51 install cl-ppcre dexador`}</code></pre>
+          <pre><code>{`$ curl -fsSL https://gargantua.space/install.sh | sh\n$ area51 new my-project\n$ area51 add cl-ppcre dexador\n$ area51 install`}</code></pre>
         </div>
 
         <div className="a51-section">
           <h3>Config</h3>
-          <pre><code>{`~/.area51/\n  \u251C\u2500\u2500 config.lisp    # registry URL, preferences\n  \u2514\u2500\u2500 packages/      # installed packages`}</code></pre>
+          <pre><code>{`~/.area51/\n  \u251C\u2500\u2500 packages/      # downloaded packages\n  \u2514\u2500\u2500 quicklisp/     # cached index`}</code></pre>
         </div>
       </div>
     </>

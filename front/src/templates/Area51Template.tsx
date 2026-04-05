@@ -1,3 +1,4 @@
+import { PageLinks, LINK_PACKAGES, LINK_DOCS, LINK_HOME } from "../components/PageLinks";
 import "./Area51Template.css";
 
 export function Area51Template() {
@@ -17,8 +18,8 @@ export function Area51Template() {
           <p className="a51-text">
             area51 is to Common Lisp what Bundler is to Ruby, Cargo to Rust, and npm to JavaScript.
             It resolves and manages your project dependencies, locking versions and ensuring reproducible builds
-            across machines. No more manual <code>ql:quickload</code> &mdash; declare what you need and let area51
-            handle the rest.
+            across machines. Declare what you need and let area51 handle the rest &mdash; no Quicklisp
+            required at runtime.
           </p>
         </section>
 
@@ -33,7 +34,7 @@ export function Area51Template() {
             </div>
             <div className="a51-arrow">
               <span className="a51-arrow-line" />
-              <span className="a51-arrow-text">area51 install</span>
+              <span className="a51-arrow-text">area51 add / install</span>
               <span className="a51-arrow-line" />
             </div>
             <div className="a51-node a51-node--local">
@@ -55,29 +56,30 @@ export function Area51Template() {
           <h2 className="a51-heading">Basic commands</h2>
 
           <div className="a51-cmd-block">
-            <h3 className="a51-cmd-name">init</h3>
-            <p className="a51-cmd-desc">Initialize a new project with an area51 manifest.</p>
-            <pre><code>area51 init my-project</code></pre>
+            <h3 className="a51-cmd-name">new</h3>
+            <p className="a51-cmd-desc">Scaffold a new project with area51.lisp and .asd.</p>
+            <pre><code>area51 new my-project</code></pre>
+          </div>
+
+          <div className="a51-cmd-block">
+            <h3 className="a51-cmd-name">add</h3>
+            <p className="a51-cmd-desc">Add a dependency to area51.lisp and .asd.</p>
+            <pre><code>{`area51 add alexandria
+area51 add my-lib --github user/my-lib`}</code></pre>
           </div>
 
           <div className="a51-cmd-block">
             <h3 className="a51-cmd-name">install</h3>
-            <p className="a51-cmd-desc">Install dependencies from the registry.</p>
-            <pre><code>{`area51 install alexandria
-area51 install  # install all from manifest`}</code></pre>
+            <p className="a51-cmd-desc">Resolve and download all dependencies.</p>
+            <pre><code>area51 install</code></pre>
           </div>
 
           <div className="a51-cmd-block">
-            <h3 className="a51-cmd-name">search</h3>
-            <p className="a51-cmd-desc">Search the gargantua registry for packages.</p>
-            <pre><code>area51 search json</code></pre>
-          </div>
-
-          <div className="a51-cmd-block">
-            <h3 className="a51-cmd-name">update</h3>
-            <p className="a51-cmd-desc">Update dependencies to their latest compatible versions.</p>
-            <pre><code>{`area51 update           # update all
-area51 update bordeaux-threads  # update one`}</code></pre>
+            <h3 className="a51-cmd-name">build / run / test</h3>
+            <p className="a51-cmd-desc">Build a binary, run the project, or execute tests.</p>
+            <pre><code>{`area51 build
+area51 run
+area51 test`}</code></pre>
           </div>
         </section>
 
@@ -88,10 +90,8 @@ area51 update bordeaux-threads  # update one`}</code></pre>
             area51 stores its configuration and cache under <code>~/.area51/</code>.
           </p>
           <pre><code>{`~/.area51/
-  config.lisp    # global settings
-  cache/         # downloaded package tarballs
-  registry/      # local registry index
-  bin/           # installed CLI tools`}</code></pre>
+  packages/      # downloaded packages
+  quicklisp/     # cached Quicklisp index`}</code></pre>
         </section>
 
         {/* GitHub link */}
@@ -107,6 +107,7 @@ area51 update bordeaux-threads  # update one`}</code></pre>
           </a>
         </section>
 
+        <PageLinks links={[LINK_PACKAGES, LINK_DOCS, LINK_HOME]} />
       </div>
     </main>
   );

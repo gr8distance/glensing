@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export function InstallCommand({ name }: { name: string }) {
   const [copied, setCopied] = useState(false);
-  const cmd = `area51 install ${name}`;
+  const cmd = `area51 add ${name}`;
 
   const copy = () => {
     navigator.clipboard.writeText(cmd).then(() => {
