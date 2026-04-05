@@ -1,9 +1,0 @@
-name = "gargantua-api"
-main = "src/index.ts"
-compatibility_date = "2025-01-01"
-account_id = "d3ca741cc6b5c9ad3e78d4a1c5d3ba12"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "gargantua-db"
-database_id = "5f772e98-f1b2-4bbb-ac8e-4d9c8cd20e14"
