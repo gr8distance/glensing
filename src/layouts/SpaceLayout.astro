@@ -1,0 +1,111 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  has3d?: boolean; // true for top page / search — skips CSS star bg
+}
+
+const { title, description = "Common Lisp Package Registry", has3d = false } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content={description}>
+  <title>{title} — gargantua</title>
+</head>
+<body>
+  {!has3d && <div class="stars-bg" />}
+
+  <nav class="site-nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">gargantua</a>
+      <div class="nav-links">
+        <a href="/packages">Packages</a>
+        <a href="/area51">area51</a>
+        <a href="/docs">Docs</a>
+      </div>
+    </div>
+  </nav>
+
+  <slot />
+
+  <footer class="site-footer">
+    <div class="container">
+      <p class="footer-text">gargantua &mdash; Common Lisp Package Registry</p>
+      <p class="footer-sub">Powered by <a href="/area51">area51</a></p>
+    </div>
+  </footer>
+</body>
+</html>
+
+<style>
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 0.8rem 0;
+    background: rgba(3, 2, 16, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(180, 120, 255, 0.3);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-links a {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.08em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover {
+    color: rgba(200, 180, 255, 0.9);
+  }
+
+  .site-footer {
+    padding: 3rem 0;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.25);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-sub {
+    font-size: 0.7rem;
+    color: rgba(80, 200, 255, 0.3);
+    margin-top: 0.3rem;
+  }
+</style>
