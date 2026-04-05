@@ -1,0 +1,182 @@
+.a51-page {
+  padding: 6rem 0 4rem;
+  min-height: 100vh;
+}
+
+/* Hero */
+.a51-hero {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  padding: 2rem 0;
+}
+
+.a51-title {
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: 0.15em;
+  color: rgba(200, 180, 255, 0.9);
+  text-shadow: 0 0 40px rgba(180, 120, 255, 0.25);
+  margin-bottom: 0.4rem;
+}
+
+.a51-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.1em;
+}
+
+/* Sections */
+.a51-section {
+  margin-bottom: 3rem;
+}
+
+.a51-heading {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(80, 200, 255, 0.6);
+  margin-bottom: 0.8rem;
+}
+
+.a51-text {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.7;
+}
+
+.a51-text code {
+  color: rgba(80, 255, 180, 0.8);
+  font-size: 0.85rem;
+}
+
+/* Diagram */
+.a51-diagram {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.a51-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1.2rem 1.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  min-width: 140px;
+}
+
+.a51-node--registry {
+  background: rgba(180, 120, 255, 0.06);
+  border-color: rgba(180, 120, 255, 0.2);
+}
+
+.a51-node--local {
+  background: rgba(80, 200, 255, 0.05);
+  border-color: rgba(80, 200, 255, 0.18);
+}
+
+.a51-node-icon {
+  font-size: 1.6rem;
+}
+
+.a51-node-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.06em;
+}
+
+.a51-node-desc {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.08em;
+}
+
+.a51-arrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1rem;
+}
+
+.a51-arrow-line {
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(180, 120, 255, 0.4), rgba(80, 255, 180, 0.4));
+}
+
+.a51-arrow-text {
+  font-size: 0.72rem;
+  color: rgba(80, 255, 180, 0.7);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+/* Command blocks */
+.a51-cmd-block {
+  margin-bottom: 1.5rem;
+}
+
+.a51-cmd-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: rgba(200, 180, 255, 0.85);
+  margin-bottom: 0.2rem;
+}
+
+.a51-cmd-desc {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.5rem;
+}
+
+/* GitHub link */
+.a51-links {
+  margin-bottom: 2rem;
+}
+
+.a51-gh-link {
+  display: inline-block;
+  font-size: 0.85rem;
+  color: rgba(80, 200, 255, 0.7);
+  border: 1px solid rgba(80, 200, 255, 0.15);
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.a51-gh-link:hover {
+  background: rgba(80, 200, 255, 0.06);
+  border-color: rgba(80, 200, 255, 0.3);
+  color: rgba(80, 200, 255, 0.95);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .a51-title {
+    font-size: 2.2rem;
+  }
+
+  .a51-diagram {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .a51-arrow {
+    flex-direction: column;
+    padding: 0.5rem 0;
+  }
+
+  .a51-arrow-line {
+    width: 1px;
+    height: 1.5rem;
+    background: linear-gradient(180deg, rgba(180, 120, 255, 0.4), rgba(80, 255, 180, 0.4));
+  }
+}

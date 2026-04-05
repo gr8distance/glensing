@@ -5,9 +5,11 @@ interface Props {
   title: string;
   description?: string;
   has3d?: boolean; // true for top page / search — skips CSS star bg
+  hideNav?: boolean; // true for top page — has its own overlay UI
+  hideFooter?: boolean; // true for top page — has its own footer
 }
 
-const { title, description = "Common Lisp Package Registry", has3d = false } = Astro.props;
+const { title, description = "Common Lisp Package Registry", has3d = false, hideNav = false, hideFooter = false } = Astro.props;
 ---
 
 <!DOCTYPE html>
@@ -21,25 +23,29 @@ const { title, description = "Common Lisp Package Registry", has3d = false } = A
 <body>
   {!has3d && <div class="stars-bg" />}
 
-  <nav class="site-nav">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo">gargantua</a>
-      <div class="nav-links">
-        <a href="/packages">Packages</a>
-        <a href="/area51">area51</a>
-        <a href="/docs">Docs</a>
+  {!hideNav && (
+    <nav class="site-nav">
+      <div class="nav-inner">
+        <a href="/" class="nav-logo">gargantua</a>
+        <div class="nav-links">
+          <a href="/packages">Packages</a>
+          <a href="/area51">area51</a>
+          <a href="/docs">Docs</a>
+        </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  )}
 
   <slot />
 
-  <footer class="site-footer">
-    <div class="container">
-      <p class="footer-text">gargantua &mdash; Common Lisp Package Registry</p>
-      <p class="footer-sub">Powered by <a href="/area51">area51</a></p>
-    </div>
-  </footer>
+  {!hideFooter && (
+    <footer class="site-footer">
+      <div class="container">
+        <p class="footer-text">gargantua &mdash; Common Lisp Package Registry</p>
+        <p class="footer-sub">Powered by <a href="/area51">area51</a></p>
+      </div>
+    </footer>
+  )}
 </body>
 </html>
 

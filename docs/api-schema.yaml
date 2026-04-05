@@ -1,0 +1,92 @@
+openapi: 3.0.3
+info:
+  title: gargantua API
+  version: 0.1.0
+  description: Common Lisp Package Registry API
+
+servers:
+  - url: https://api.gargantua.space
+    description: Production
+  - url: http://localhost:8787
+    description: Local development
+
+paths:
+  /api/v1/packages:
+    get:
+      operationId: listPackages
+      summary: List or search packages
+      parameters:
+        - name: q
+          in: query
+          schema: { type: string }
+          description: Search query (matches name and description)
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: per_page
+          in: query
+          schema: { type: integer, default: 30, maximum: 100 }
+      responses:
+        "200":
+          description: Package list
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [packages, total, page]
+                properties:
+                  packages:
+                    type: array
+                    items: { $ref: "#/components/schemas/PackageSummary" }
+                  total: { type: integer }
+                  page: { type: integer }
+
+  /api/v1/packages/{name}:
+    get:
+      operationId: getPackage
+      summary: Get package details
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Package detail
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PackageDetail" }
+        "404":
+          description: Package not found
+
+components:
+  schemas:
+    PackageSummary:
+      type: object
+      required: [name, description, version]
+      properties:
+        name: { type: string, example: "alexandria" }
+        description: { type: string, example: "A collection of portable public-domain utilities" }
+        version: { type: string, example: "1.4" }
+        license: { type: string, example: "Public Domain" }
+
+    PackageDetail:
+      allOf:
+        - $ref: "#/components/schemas/PackageSummary"
+        - type: object
+          properties:
+            repository: { type: string, format: uri }
+            deps:
+              type: array
+              items: { type: string }
+            reverse_deps:
+              type: array
+              items: { type: string }
+            versions:
+              type: array
+              items:
+                type: object
+                required: [version, released_at]
+                properties:
+                  version: { type: string }
+                  released_at: { type: string, format: date }

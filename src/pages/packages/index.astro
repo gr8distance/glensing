@@ -1,0 +1,17 @@
+---
+import SpaceLayout from "../../layouts/SpaceLayout.astro";
+import { SearchResultsTemplate } from "../../templates/SearchResultsTemplate";
+import { searchPackages, PACKAGES } from "../../data/packages";
+
+const query = Astro.url.searchParams.get("search") ?? "";
+const results = query ? searchPackages(query) : PACKAGES;
+---
+
+<SpaceLayout title={query ? `Search: ${query}` : "Packages"}>
+  <SearchResultsTemplate
+    query={query}
+    results={results}
+    allPackages={PACKAGES}
+    client:load
+  />
+</SpaceLayout>

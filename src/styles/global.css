@@ -39,6 +39,9 @@ body {
   color: var(--text-primary);
   font-family: var(--font-mono);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100dvh;
 }
 
 a {

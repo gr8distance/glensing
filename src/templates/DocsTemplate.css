@@ -1,0 +1,234 @@
+/* === DocsTemplate — Documentation Page === */
+
+.docs-page {
+  padding: 7rem 0 4rem;
+  min-height: 100vh;
+}
+
+/* Hero */
+.docs-hero {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.docs-hero-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
+  margin-bottom: 0.8rem;
+}
+
+.docs-hero-title {
+  font-size: 2.4rem;
+  font-weight: 300;
+  letter-spacing: 0.08em;
+  color: rgba(200, 180, 255, 0.9);
+  margin-bottom: 1rem;
+}
+
+.docs-hero-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* Section */
+.docs-section {
+  margin-bottom: 3.5rem;
+}
+
+.docs-section-title {
+  font-size: 1.35rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: rgba(200, 180, 255, 0.85);
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(180, 120, 255, 0.12);
+}
+
+.docs-text {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.docs-text strong {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Code blocks */
+.docs-code-block {
+  position: relative;
+  margin: 1rem 0 1.5rem;
+}
+
+.docs-code-block pre {
+  background: rgba(5, 3, 20, 0.7);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+}
+
+.docs-code-block code {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--text-code);
+  line-height: 1.7;
+}
+
+.docs-code-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+/* Inline code */
+.docs-text code,
+.docs-list code,
+.docs-table code {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-code);
+  background: rgba(80, 255, 180, 0.06);
+  border: 1px solid rgba(80, 255, 180, 0.1);
+  border-radius: 3px;
+  padding: 0.1rem 0.35rem;
+}
+
+/* Lists */
+.docs-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.8rem 0 1.2rem;
+}
+
+.docs-list li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding-left: 1.2rem;
+  position: relative;
+}
+
+.docs-list li::before {
+  content: "\203A";
+  position: absolute;
+  left: 0;
+  color: var(--accent-purple-dim);
+  font-weight: bold;
+}
+
+/* File tree */
+.docs-file-tree {
+  background: rgba(5, 3, 20, 0.5);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.2rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.docs-file-tree code {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.9;
+  white-space: pre;
+}
+
+.docs-file-tree .tree-dir {
+  color: var(--accent-purple);
+}
+
+.docs-file-tree .tree-file {
+  color: var(--accent-cyan);
+}
+
+.docs-file-tree .tree-comment {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Table */
+.docs-table-wrap {
+  overflow-x: auto;
+  margin: 1rem 0 1.5rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+}
+
+.docs-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.docs-table th {
+  text-align: left;
+  font-weight: 500;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-purple);
+  background: rgba(180, 120, 255, 0.06);
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid rgba(180, 120, 255, 0.12);
+}
+
+.docs-table td {
+  padding: 0.6rem 1rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+  line-height: 1.6;
+}
+
+.docs-table tr:last-child td {
+  border-bottom: none;
+}
+
+.docs-table tr:hover td {
+  background: rgba(180, 120, 255, 0.03);
+}
+
+.docs-table td:first-child {
+  white-space: nowrap;
+}
+
+/* Config section */
+.docs-config-path {
+  font-size: 0.82rem;
+  color: var(--accent-cyan);
+  background: rgba(80, 200, 255, 0.06);
+  border: 1px solid rgba(80, 200, 255, 0.1);
+  border-radius: var(--radius-sm);
+  padding: 0.4rem 0.8rem;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .docs-hero-title {
+    font-size: 1.6rem;
+  }
+
+  .docs-section-title {
+    font-size: 1.1rem;
+  }
+
+  .docs-table th,
+  .docs-table td {
+    padding: 0.5rem 0.6rem;
+    font-size: 0.75rem;
+  }
+}
