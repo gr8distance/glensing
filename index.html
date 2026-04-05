@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gargantua — CL Package Registry</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="scene"></canvas>
+
+  <!-- Hero overlay (first viewport) -->
+  <div id="overlay">
+    <div id="title">
+      <h1>gargantua</h1>
+      <p class="tagline">Common Lisp Package Registry</p>
+    </div>
+
+    <div id="search-box">
+      <input type="text" id="search" placeholder="Search packages..." autocomplete="off">
+      <div id="results"></div>
+    </div>
+
+    <div id="stats">
+      <span id="pkg-count"></span>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div id="scroll-hint">
+    <span class="scroll-arrow">&darr;</span>
+  </div>
+
+  <!-- area51 ground station HUD -->
+  <div id="area51">
+    <div id="area51-pulse"></div>
+    <div id="area51-label">
+      <span class="a51-icon">&#9651;</span>
+      <span class="a51-name">area51</span>
+      <span class="a51-path">~/.area51/packages/</span>
+    </div>
+    <div id="install-log"></div>
+  </div>
+
+  <!-- Scrollable content below the fold -->
+  <div id="content">
+    <section id="about-section">
+      <div class="section-inner">
+        <h2>What is gargantua?</h2>
+        <p>A package registry for Common Lisp. Packages orbit in gargantua's gravitational field, ready to be pulled into your local environment via <strong>area51</strong>.</p>
+
+        <div class="flow-diagram">
+          <div class="flow-node">
+            <span class="flow-icon bh">&#9679;</span>
+            <div>
+              <div class="flow-title">gargantua</div>
+              <div class="flow-desc">Package Registry</div>
+            </div>
+          </div>
+          <div class="flow-arrow">&darr; <code>area51 install</code></div>
+          <div class="flow-node">
+            <span class="flow-icon earth">&#9679;</span>
+            <div>
+              <div class="flow-title">area51</div>
+              <div class="flow-desc">~/.area51/packages/</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quickstart-section">
+      <div class="section-inner">
+        <h2>Quick Start</h2>
+        <div class="code-block">
+          <pre><code><span class="c-comment"># Install area51</span>
+$ curl -fsSL https://gargantua.space/install.sh | sh
+
+<span class="c-comment"># Start a new project</span>
+$ area51 init my-project
+
+<span class="c-comment"># Add packages from gargantua</span>
+$ area51 install alexandria cl-ppcre dexador</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="packages-section">
+      <div class="section-inner">
+        <h2>Packages in Orbit</h2>
+        <div id="package-grid"></div>
+      </div>
+    </section>
+
+    <footer>
+      <p>gargantua &mdash; Common Lisp Package Registry</p>
+      <p class="footer-sub">Powered by area51</p>
+    </footer>
+  </div>
+
+  <div id="tooltip" class="hidden"></div>
+
+  <!-- Package labels (positioned via JS) -->
+  <div id="pkg-labels"></div>
+
+  <!-- Package detail overlay (shown on package click) -->
+  <div id="pkg-detail">
+    <button id="pkg-detail-close">&times;</button>
+    <div id="pkg-detail-content"></div>
+  </div>
+
+  <!-- area51 detail overlay (shown on earth click) -->
+  <div id="area51-detail">
+    <button id="area51-close">&times;</button>
+    <h2>area51</h2>
+    <p class="a51-subtitle">Common Lisp Package Manager</p>
+
+    <div class="a51-section">
+      <h3>Install</h3>
+      <pre><code>$ area51 install alexandria</code></pre>
+      <p>Packages are fetched from <strong>gargantua</strong> and installed to your local machine.</p>
+    </div>
+
+    <div class="a51-section">
+      <h3>How it works</h3>
+      <div class="a51-flow">
+        <div class="a51-node">
+          <span class="a51-node-icon">&#9679;</span>
+          <span>gargantua</span>
+          <span class="a51-node-desc">Registry (space)</span>
+        </div>
+        <div class="a51-arrow">&darr;</div>
+        <div class="a51-node">
+          <span class="a51-node-icon">&#9651;</span>
+          <span>area51</span>
+          <span class="a51-node-desc">Your machine (earth)</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="a51-section">
+      <h3>Quick Start</h3>
+      <pre><code>$ curl -fsSL https://gargantua.space/install.sh | sh
+$ area51 init my-project
+$ area51 install cl-ppcre dexador</code></pre>
+    </div>
+
+    <div class="a51-section">
+      <h3>Config</h3>
+      <pre><code>~/.area51/
+  ├── config.lisp    # registry URL, preferences
+  └── packages/      # installed packages</code></pre>
+    </div>
+  </div>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
