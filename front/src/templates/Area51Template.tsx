@@ -94,8 +94,8 @@ area51 test`}</code></pre>
             {t.a51.configDesc} <code>~/.area51/</code>
           </p>
           <pre><code>{`~/.area51/
-  packages/      # downloaded packages
-  quicklisp/     # cached Quicklisp index`}</code></pre>
+  packages/      # ${t.a51.treeDownloaded}
+  quicklisp/     # ${t.a51.treeCachedIndex}`}</code></pre>
         </section>
 
         {/* GitHub link */}

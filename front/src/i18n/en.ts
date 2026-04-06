@@ -99,6 +99,8 @@ export const en = {
     },
     config: "Configuration",
     configDesc: "area51 stores its cache under",
+    treeDownloaded: "downloaded packages",
+    treeCachedIndex: "cached Quicklisp index",
     source: "Source",
     github: "View on GitHub",
   },
@@ -151,6 +153,8 @@ export const en = {
     configTitle: "Configuration",
     configText: "area51 stores its configuration and cache in your home directory.",
     configCache: "Packages are downloaded once and cached here. The Quicklisp index is refreshed automatically every 24 hours. Run <code>area51 clean</code> to clear the entire cache.",
+    treeDownloaded: "downloaded packages",
+    treeCachedIndex: "cached Quicklisp index",
     commands: {
       title: "Commands Reference",
       text: "All available area51 commands at a glance.",

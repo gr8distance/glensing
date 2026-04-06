@@ -99,6 +99,8 @@ export const ja = {
     },
     config: "設定",
     configDesc: "area51 はキャッシュを以下に保存します：",
+    treeDownloaded: "ダウンロード済みパッケージ",
+    treeCachedIndex: "キャッシュ済み Quicklisp インデックス",
     source: "ソースコード",
     github: "GitHub で見る",
   },
@@ -151,6 +153,8 @@ export const ja = {
     configTitle: "設定",
     configText: "area51 は設定とキャッシュをホームディレクトリに保存します。",
     configCache: "パッケージは一度ダウンロードされるとここにキャッシュされます。Quicklisp インデックスは24時間ごとに自動更新されます。<code>area51 clean</code> でキャッシュ全体をクリアできます。",
+    treeDownloaded: "ダウンロード済みパッケージ",
+    treeCachedIndex: "キャッシュ済み Quicklisp インデックス",
     commands: {
       title: "コマンドリファレンス",
       text: "area51 の全コマンド一覧。",

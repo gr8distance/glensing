@@ -125,8 +125,8 @@ area51 add some-lib --url https://example.com/lib.tar.gz`}</code></pre>
           <div className="docs-file-tree">
             <code>
               <span className="tree-dir">~/.area51/</span>{"\n"}
-              {"  "}<span className="tree-dir">packages/</span>{"         "}<span className="tree-comment"># downloaded packages</span>{"\n"}
-              {"  "}<span className="tree-dir">quicklisp/</span>{"        "}<span className="tree-comment"># cached Quicklisp index</span>
+              {"  "}<span className="tree-dir">packages/</span>{"         "}<span className="tree-comment"># {t.docs.treeDownloaded}</span>{"\n"}
+              {"  "}<span className="tree-dir">quicklisp/</span>{"        "}<span className="tree-comment"># {t.docs.treeCachedIndex}</span>
             </code>
           </div>
           <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.configCache }} />

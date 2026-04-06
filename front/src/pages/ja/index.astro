@@ -2,8 +2,23 @@
 import SpaceLayout from "../../layouts/SpaceLayout.astro";
 import { TopPageTemplate } from "../../templates/TopPageTemplate";
 import { PACKAGES } from "../../data/packages";
+
+const featured = PACKAGES.filter((p) => p.desc).slice(0, 20);
 ---
 
-<SpaceLayout title="glensing" has3d hideFooter locale="ja">
+<SpaceLayout title="Gravity Lensing" has3d hideFooter locale="ja">
   <TopPageTemplate client:only="react" packages={PACKAGES} locale="ja" />
+  <noscript>
+    <main style="max-width:800px;margin:0 auto;padding:2rem;color:#ccc;">
+      <h1>Gravity Lensing — Common Lisp パッケージレジストリ & スコープ</h1>
+      <p>Common Lisp のパッケージを検索・閲覧できます。現在 Quicklisp から {PACKAGES.length} パッケージをインデックス中。</p>
+      <h2>注目のパッケージ</h2>
+      <ul>
+        {featured.map((p) => (
+          <li><a href={`/ja/packages/${p.name}`}>{p.name}</a> — {p.desc}</li>
+        ))}
+      </ul>
+      <p><a href="/ja/packages">全パッケージ</a> | <a href="/ja/docs">ドキュメント</a> | <a href="/ja/about">概要</a></p>
+    </main>
+  </noscript>
 </SpaceLayout>

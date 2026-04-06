@@ -378,6 +378,12 @@
   margin-bottom: 0.4rem;
 }
 
+.top-pkg-detail .pd-note {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.3);
+  margin-top: 0.4rem;
+}
+
 .top-pkg-detail pre {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.06);

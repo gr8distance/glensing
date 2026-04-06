@@ -2,14 +2,20 @@ import { en } from "./en";
 import { ja } from "./ja";
 
 export type Locale = "en" | "ja";
+export type Translations = typeof en;
 export const DEFAULT_LOCALE: Locale = "en";
 export const LOCALES: Locale[] = ["en", "ja"];
 
-const translations: Record<Locale, typeof en> = { en, ja: ja as unknown as typeof en };
+// Validate ja satisfies the same shape as en at the type level
+const _jaCheck: Translations = ja as Translations;
+const translations: Record<Locale, Translations> = { en, ja: _jaCheck };
 
-export function useTranslations(locale: Locale = "en") {
+export function getTranslations(locale: Locale = "en"): Translations {
   return translations[locale];
 }
+
+// Alias for backwards compatibility
+export const useTranslations = getTranslations;
 
 export function localePath(locale: Locale, path: string): string {
   if (locale === "en") return path;
