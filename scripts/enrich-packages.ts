@@ -199,11 +199,12 @@ async function main() {
       const existing = existingPackages.get(release.name) || {};
       const parsed = mainAsd ? parseAsd(mainAsd.content) : null;
 
-      // Resolve repo URL: existing > homepage > source-control > quicklisp tarball
-      const repo = existing.repo
+      // Resolve repo URL: existing > homepage > source-control (no tarball fallback)
+      const existingRepo = existing.repo?.startsWith("http://beta.quicklisp") ? null : existing.repo;
+      const repo = existingRepo
         || parsed?.homepage
         || parsed?.sourceControl
-        || release.url;
+        || null;
 
       const pkg: PackageData = {
         name: release.name,
