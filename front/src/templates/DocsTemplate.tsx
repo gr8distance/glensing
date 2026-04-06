@@ -42,7 +42,7 @@ export function DocsTemplate({ locale = "en" }: Props) {
           <p className="docs-text">{t.docs.install.text}</p>
           <div className="docs-code-block">
             <span className="docs-code-label">Shell</span>
-            <pre><code>curl -fsSL https://gargantua.dev/install.sh | sh</code></pre>
+            <pre><code>curl -fsSL https://raw.githubusercontent.com/gr8distance/area51/main/install.sh | bash</code></pre>
           </div>
           <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.install.path }} />
           <div className="docs-code-block">
@@ -108,7 +108,7 @@ area51 add some-lib --url https://example.com/lib.tar.gz`}</code></pre>
           <h2 className="docs-section-title">{t.docs.browsing.title}</h2>
           <p className="docs-text">
             {t.docs.browsing.text}{" "}
-            <a href={localePath(locale, "/packages")}>glensing.space/packages</a>.
+            <a href={localePath(locale, "/packages")}>glensing.dev/packages</a>.
           </p>
           <p className="docs-text">{t.docs.browsing.installed}</p>
           <div className="docs-code-block">

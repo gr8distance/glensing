@@ -21,7 +21,7 @@ export function AboutTemplate({ locale = "en" }: Props) {
           <p className="about-hero-sub">{t.about.subtitle}</p>
         </header>
 
-        {/* What is gargantua */}
+        {/* What is glensing */}
         <section className="about-section">
           <h2 className="about-section-title">{t.about.whatGargantua.title}</h2>
           <p className="about-text">{t.about.whatGargantua.desc}</p>

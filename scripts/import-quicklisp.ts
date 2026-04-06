@@ -1,6 +1,6 @@
 #!/usr/bin/env bun
 /**
- * Import packages from Quicklisp distribution into gargantua.
+ * Import packages from Quicklisp distribution into glensing.
  *
  * Fetches releases.txt + systems.txt, resolves GitHub descriptions,
  * and writes front/src/data/packages.ts + api/src/db/seed.sql.
@@ -91,7 +91,7 @@ async function fetchGithubDesc(
 ): Promise<{ desc: string; license: string | null } | null> {
   const headers: Record<string, string> = {
     Accept: "application/vnd.github.v3+json",
-    "User-Agent": "gargantua-importer",
+    "User-Agent": "glensing-importer",
   };
   if (GITHUB_TOKEN) headers.Authorization = `token ${GITHUB_TOKEN}`;
 

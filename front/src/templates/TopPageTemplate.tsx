@@ -4,12 +4,17 @@ import { initScene, type SceneAPI } from "../components/BlackHoleScene";
 import { useTranslations, localePath, type Locale } from "../i18n";
 import "./TopPageTemplate.css";
 
-const ORBIT_COUNT = 180;
+function getOrbitCount(): number {
+  if (typeof window === "undefined") return 180;
+  const w = window.innerWidth;
+  if (w < 480) return 40;
+  if (w < 768) return 80;
+  return 180;
+}
 
 function pickRandom(allPkgs: Package[], count: number): Package[] {
   const withDesc = allPkgs.filter((p) => p.desc);
   const withoutDesc = allPkgs.filter((p) => !p.desc);
-  // Always include described packages, fill rest randomly
   const shuffled = [...withoutDesc].sort(() => Math.random() - 0.5);
   return [...withDesc, ...shuffled].slice(0, count);
 }
@@ -20,7 +25,7 @@ interface Props {
 }
 
 export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props) {
-  const packages = useMemo(() => pickRandom(allPackages, ORBIT_COUNT), []);
+  const packages = useMemo(() => pickRandom(allPackages, getOrbitCount()), []);
   const t = useTranslations(locale);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const sceneAPIRef = useRef<SceneAPI | null>(null);
@@ -375,7 +380,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
           <div className="section-inner">
             <h2>{t.top.quickstart}</h2>
             <div className="code-block">
-              <pre><code><span className="c-comment">{t.top.commentInstall}</span>{"\n"}$ curl -fsSL https://gargantua.space/install.sh | sh{"\n"}{"\n"}<span className="c-comment">{t.top.commentNew}</span>{"\n"}$ area51 new my-project{"\n"}{"\n"}<span className="c-comment">{t.top.commentAdd}</span>{"\n"}$ area51 add alexandria cl-ppcre dexador{"\n"}{"\n"}<span className="c-comment">{t.top.commentDownload}</span>{"\n"}$ area51 install</code></pre>
+              <pre><code><span className="c-comment">{t.top.commentInstall}</span>{"\n"}$ curl -fsSL https://raw.githubusercontent.com/gr8distance/area51/main/install.sh | bash{"\n"}{"\n"}<span className="c-comment">{t.top.commentNew}</span>{"\n"}$ area51 new my-project{"\n"}{"\n"}<span className="c-comment">{t.top.commentAdd}</span>{"\n"}$ area51 add alexandria cl-ppcre dexador{"\n"}{"\n"}<span className="c-comment">{t.top.commentDownload}</span>{"\n"}$ area51 install</code></pre>
             </div>
           </div>
         </section>
@@ -384,15 +389,15 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
           <div className="section-inner">
             <h2>{t.top.packages}</h2>
             <div className="top-package-grid">
-              {packages.map((p, i) => (
-                <div
+              {packages.map((p) => (
+                <a
                   key={p.name}
                   className="pkg-card"
-                  onClick={() => handlePackageCardClick(i)}
+                  href={localePath(locale, `/packages/${p.name}`)}
                 >
                   <div className="pkg-name">{p.name}</div>
                   <div className="pkg-desc">{p.desc}</div>
-                </div>
+                </a>
               ))}
             </div>
           </div>
@@ -559,7 +564,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
 
         <div className="a51-section">
           <h3>{t.top.a51.quickstart}</h3>
-          <pre><code>{`$ curl -fsSL https://gargantua.space/install.sh | sh\n$ area51 new my-project\n$ area51 add cl-ppcre dexador\n$ area51 install`}</code></pre>
+          <pre><code>{`$ curl -fsSL https://raw.githubusercontent.com/gr8distance/area51/main/install.sh | bash\n$ area51 new my-project\n$ area51 add cl-ppcre dexador\n$ area51 install`}</code></pre>
         </div>
 
         <div className="a51-section">

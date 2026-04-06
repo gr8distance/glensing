@@ -218,7 +218,7 @@ export const en = {
       },
       {
         q: "How do I install area51?",
-        a: "Run the following command in your terminal:\ncurl -fsSL https://gargantua.dev/install.sh | sh",
+        a: "Run the following command in your terminal:\ncurl -fsSL https://raw.githubusercontent.com/gr8distance/area51/main/install.sh | bash",
       },
       {
         q: "How do I add a package?",

@@ -52,7 +52,7 @@ export function Area51Template({ locale = "en" }: Props) {
         {/* Installation */}
         <section className="a51-section">
           <h2 className="a51-heading">{t.a51.installation}</h2>
-          <pre><code>curl -fsSL https://gargantua.dev/install.sh | sh</code></pre>
+          <pre><code>curl -fsSL https://raw.githubusercontent.com/gr8distance/area51/main/install.sh | bash</code></pre>
         </section>
 
         {/* Basic commands */}
