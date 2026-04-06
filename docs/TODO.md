@@ -20,3 +20,12 @@
 ## 共通方針
 
 生成AIネイティブなツールとして設計する。人間が使いやすいのは当然として、AIが読んで即座に使えることを前提にする。これからの時代、ツールのユーザーは人間だけではない。
+
+## パッケージデータ拡充
+
+- [ ] Quicklisp tarball から `.asd` の `:description` を抽出してパッケージ説明を拡充
+  - 現在 desc があるのは 54/2382 パッケージのみ（GitHub KNOWN_REPOS 分だけ）
+  - releases.txt の tarball URL → ダウンロード → .asd パース → :description 取得
+  - GitHub repo description よりも .asd の方が作者の公式説明で正確
+- [ ] D1 + API 復活でパッケージメタデータを動的管理
+  - MCP サーバーがパッケージ検索する前提として desc の充実が必須
