@@ -61,16 +61,29 @@ function extractDependsOn(content: string): string[] {
   return [...new Set(deps.map((d) => d.toLowerCase()))];
 }
 
+function extractUrlField(content: string, field: string): string | null {
+  // Match :field "url" or :field (:git "url")
+  const directMatch = content.match(new RegExp(`:${field}\\s+"(https?://[^"]+)"`, "si"));
+  if (directMatch) return directMatch[1];
+  const gitMatch = content.match(new RegExp(`:${field}\\s+\\(:git\\s+"(https?://[^"]+)"`, "si"));
+  if (gitMatch) return gitMatch[1];
+  return null;
+}
+
 function parseAsd(content: string): {
   description: string | null;
   license: string | null;
   author: string | null;
+  homepage: string | null;
+  sourceControl: string | null;
   deps: string[];
 } {
   return {
     description: extractStringField(content, "description"),
     license: extractStringField(content, "license") || extractStringField(content, "licence"),
     author: extractStringField(content, "author"),
+    homepage: extractUrlField(content, "homepage"),
+    sourceControl: extractUrlField(content, "source-control"),
     deps: extractDependsOn(content),
   };
 }
@@ -186,10 +199,16 @@ async function main() {
       const existing = existingPackages.get(release.name) || {};
       const parsed = mainAsd ? parseAsd(mainAsd.content) : null;
 
+      // Resolve repo URL: existing > homepage > source-control > quicklisp tarball
+      const repo = existing.repo
+        || parsed?.homepage
+        || parsed?.sourceControl
+        || release.url;
+
       const pkg: PackageData = {
         name: release.name,
         desc: parsed?.description || existing.desc || "",
-        repo: existing.repo || null,
+        repo,
         license: parsed?.license || existing.license || null,
         author: parsed?.author || null,
         deps: (existing.deps?.length > 0 ? existing.deps : parsed?.deps) || [],
@@ -249,6 +268,8 @@ async function main() {
   console.log(`  With description: ${sorted.filter((p) => p.desc).length}`);
   console.log(`  With license: ${sorted.filter((p) => p.license).length}`);
   console.log(`  With author: ${sorted.filter((p) => p.author).length}`);
+  console.log(`  With repo: ${sorted.filter((p) => p.repo && !p.repo.startsWith("http://beta.quicklisp")).length} (from .asd)`);
+  console.log(`  With repo (incl. tarball fallback): ${sorted.filter((p) => p.repo).length}`);
 
   // Write packages.ts
   const tsLines = [
