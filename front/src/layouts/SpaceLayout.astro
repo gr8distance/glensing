@@ -15,9 +15,12 @@ const { title, description, has3d = false, hideNav = false, hideFooter = false, 
 const t = useTranslations(locale);
 const defaultDesc = t.footer.description;
 const desc = description ?? defaultDesc;
+const origin = "https://glensing.dev";
 const currentPath = Astro.url.pathname;
+const canonicalUrl = `${origin}${currentPath}`;
 const altLocale = locale === "en" ? "ja" : "en";
 const altPath = switchLocalePath(altLocale, currentPath);
+const altUrl = `${origin}${altPath}`;
 ---
 
 <!DOCTYPE html>
@@ -26,23 +29,28 @@ const altPath = switchLocalePath(altLocale, currentPath);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content={desc}>
+  <meta name="theme-color" content="#030210">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-  <link rel="alternate" hreflang={altLocale} href={altPath}>
+  <link rel="canonical" href={canonicalUrl}>
+  <link rel="alternate" hreflang={locale} href={canonicalUrl}>
+  <link rel="alternate" hreflang={altLocale} href={altUrl}>
+  <link rel="alternate" hreflang="x-default" href={canonicalUrl}>
   <meta property="og:title" content={`${title} — Gravity Lensing`}>
   <meta property="og:description" content={desc}>
-  <meta property="og:image" content="/og-image.png">
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:image" content={`${origin}/og-image.png`}>
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={`${title} — Gravity Lensing`}>
   <meta name="twitter:description" content={desc}>
-  <meta name="twitter:image" content="/og-image.png">
-  <title>{title} — glensing</title>
+  <meta name="twitter:image" content={`${origin}/og-image.png`}>
+  <title>{title} — Gravity Lensing</title>
 </head>
 <body>
   {!has3d && <div class="stars-bg" />}
 
   {!hideNav && (
-    <nav class="site-nav">
+    <nav class="site-nav" aria-label="Main navigation">
       <div class="nav-inner">
         <a href={localePath(locale, "/")} class="nav-logo">Gravity Lensing</a>
         <div class="nav-links">
@@ -50,7 +58,7 @@ const altPath = switchLocalePath(altLocale, currentPath);
           <a href={localePath(locale, "/area51")}>{t.nav.area51}</a>
           <a href={localePath(locale, "/docs")}>{t.nav.docs}</a>
           <div class="nav-lang-wrap">
-            <select class="nav-lang-select" onchange="window.location.href=this.value">
+            <select class="nav-lang-select" aria-label="Language" onchange="window.location.href=this.value">
               <option value={switchLocalePath("en", currentPath)} selected={locale === "en"}>EN</option>
               <option value={switchLocalePath("ja", currentPath)} selected={locale === "ja"}>日本語</option>
             </select>

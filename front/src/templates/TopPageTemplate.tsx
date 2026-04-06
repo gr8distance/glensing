@@ -277,17 +277,6 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
     zoomToPackage(index);
   }
 
-  function handlePackageCardClick(index: number) {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    const waitForScroll = () => {
-      if (window.scrollY < 10) {
-        setTimeout(() => zoomToPackage(index), 300);
-      } else {
-        requestAnimationFrame(waitForScroll);
-      }
-    };
-    requestAnimationFrame(waitForScroll);
-  }
 
   return (
     <>
@@ -296,6 +285,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
       {/* Hero overlay */}
       <div ref={overlayRef} className={`top-overlay${overlayFaded ? " faded" : ""}`}>
         <div className="top-title">
+          <h1 className="sr-only">Gravity Lensing — Common Lisp Package Registry & Scope</h1>
           <p className="top-tagline">{t.top.tagline}</p>
         </div>
 
