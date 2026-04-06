@@ -54,7 +54,7 @@ ${t.pkg.usageComment2}
           <section className="pkg-links">
             <h2>{t.pkg.links}</h2>
             <a href={pkg.repo} target="_blank" rel="noopener noreferrer" className="pkg-repo-link">
-              {t.pkg.source} &rarr;
+              {pkg.repo.includes("quicklisp.org") ? "View on Quicklisp" : t.pkg.source} &rarr;
             </a>
           </section>
         )}
