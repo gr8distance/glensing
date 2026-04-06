@@ -7,8 +7,8 @@ import "./TopPageTemplate.css";
 function getOrbitCount(): number {
   if (typeof window === "undefined") return 180;
   const w = window.innerWidth;
-  if (w < 480) return 40;
-  if (w < 768) return 80;
+  if (w < 480) return 80;
+  if (w < 768) return 160;
   return 180;
 }
 
