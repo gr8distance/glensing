@@ -31,6 +31,8 @@ const altUrl = `${origin}${altPath}`;
   <meta name="description" content={desc}>
   <meta name="theme-color" content="#030210">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="canonical" href={canonicalUrl}>
   <link rel="alternate" hreflang={locale} href={canonicalUrl}>
   <link rel="alternate" hreflang={altLocale} href={altUrl}>
@@ -40,6 +42,8 @@ const altUrl = `${origin}${altPath}`;
   <meta property="og:url" content={canonicalUrl}>
   <meta property="og:image" content={`${origin}/og-image.png`}>
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gravity Lensing">
+  <meta property="og:locale" content={locale === "ja" ? "ja_JP" : "en_US"}>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content={`${title} — Gravity Lensing`}>
   <meta name="twitter:description" content={desc}>

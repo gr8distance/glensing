@@ -491,6 +491,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
       <div className={`top-pkg-detail${pkgDetail ? " visible" : ""}`}>
         <button
           className="top-pkg-detail-close"
+          aria-label="Close"
           onClick={(e) => {
             e.stopPropagation();
             closePackageDetail();
@@ -519,6 +520,7 @@ export function TopPageTemplate({ packages: allPackages, locale = "en" }: Props)
       <div className={`top-area51-detail${area51DetailVisible ? " visible" : ""}`}>
         <button
           className="top-area51-close"
+          aria-label="Close"
           onClick={(e) => {
             e.stopPropagation();
             returnHome();

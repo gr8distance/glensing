@@ -14,7 +14,14 @@ export function InstallCommand({ name, locale = "en" }: { name: string; locale?:
   };
 
   return (
-    <div className="install-cmd" onClick={copy} title={t.pkg.copyTooltip}>
+    <div
+      className="install-cmd"
+      role="button"
+      tabIndex={0}
+      onClick={copy}
+      onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); copy(); } }}
+      title={t.pkg.copyTooltip}
+    >
       <code>$ {cmd}</code>
       <span className={`install-copy ${copied ? "copied" : ""}`}>
         {copied ? t.pkg.copied : t.pkg.copy}

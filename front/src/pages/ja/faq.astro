@@ -1,8 +1,23 @@
 ---
 import SpaceLayout from "../../layouts/SpaceLayout.astro";
 import { FaqTemplate } from "../../templates/FaqTemplate";
+import { ja } from "../../i18n/ja";
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: ja.faq.items.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.a,
+    },
+  })),
+});
 ---
 
-<SpaceLayout title="FAQ" description="glensing と area51 に関するよくある質問" locale="ja">
+<SpaceLayout title="FAQ" description="Gravity Lensing と area51 に関するよくある質問" locale="ja">
+  <script type="application/ld+json" set:html={faqJsonLd} />
   <FaqTemplate client:load locale="ja" />
 </SpaceLayout>

@@ -11,6 +11,6 @@ const pkg = findPackage(Astro.params.name!);
 if (!pkg) return Astro.redirect("/404");
 ---
 
-<SpaceLayout title={pkg.name} locale="ja">
+<SpaceLayout title={pkg.name} description={pkg.desc || `${pkg.name} — Common Lisp パッケージ`} locale="ja">
   <PackageDetailTemplate pkg={pkg} locale="ja" client:load />
 </SpaceLayout>
