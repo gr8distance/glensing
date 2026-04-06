@@ -28,6 +28,14 @@ const altPath = switchLocalePath(altLocale, currentPath);
   <meta name="description" content={desc}>
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate" hreflang={altLocale} href={altPath}>
+  <meta property="og:title" content={`${title} — Gravity Lensing`}>
+  <meta property="og:description" content={desc}>
+  <meta property="og:image" content="/og-image.png">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={`${title} — Gravity Lensing`}>
+  <meta name="twitter:description" content={desc}>
+  <meta name="twitter:image" content="/og-image.png">
   <title>{title} — glensing</title>
 </head>
 <body>
