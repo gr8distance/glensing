@@ -61,8 +61,15 @@ export const en = {
   search: {
     placeholder: "Search packages...",
     count: (count: number) => `${count} package${count !== 1 ? "s" : ""} found`,
-    emptyTitle: "No packages found in orbit",
-    emptyHint: "Try a different search term or browse all packages",
+    resultsFor: (count: number, query: string) => `${count} result${count !== 1 ? "s" : ""} for "${query}"`,
+    emptyTitle: (query: string) => `No packages found for "${query}"`,
+    emptyHint: "Check your spelling, try broader keywords, or",
+    emptyBrowse: (count: number) => `browse all ${count} packages`,
+    sortRelevance: "Relevance",
+    sortMostUsed: "Most used",
+    sortNameAsc: "Name (A\u2192Z)",
+    sortNameDesc: "Name (Z\u2192A)",
+    usedBy: (count: number) => `Used by ${count}`,
   },
 
   // Package detail

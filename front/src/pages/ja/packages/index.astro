@@ -3,11 +3,11 @@ import SpaceLayout from "../../../layouts/SpaceLayout.astro";
 import { SearchResultsTemplate } from "../../../templates/SearchResultsTemplate";
 import { searchPackages, PACKAGES } from "../../../data/packages";
 
-const query = Astro.url.searchParams.get("search") ?? "";
+const query = Astro.url.searchParams.get("q") ?? Astro.url.searchParams.get("search") ?? "";
 const results = query ? searchPackages(query) : PACKAGES;
 ---
 
-<SpaceLayout title={query ? `検索: ${query}` : "パッケージ"} locale="ja">
+<SpaceLayout title={query ? `"${query}" — パッケージ` : "パッケージ"} description="Gravity Lensing で 2382 の Common Lisp パッケージを検索・閲覧" locale="ja">
   <SearchResultsTemplate
     query={query}
     results={results}

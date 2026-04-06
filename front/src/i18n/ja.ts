@@ -61,8 +61,15 @@ export const ja = {
   search: {
     placeholder: "パッケージを検索...",
     count: (count: number) => `${count} 件のパッケージが見つかりました`,
-    emptyTitle: "軌道上にパッケージが見つかりません",
-    emptyHint: "別の検索ワードを試すか、全パッケージを閲覧してください",
+    resultsFor: (count: number, query: string) => `"${query}" の検索結果: ${count}件`,
+    emptyTitle: (query: string) => `"${query}" に一致するパッケージが見つかりません`,
+    emptyHint: "スペルを確認するか、より広いキーワードを試すか、",
+    emptyBrowse: (count: number) => `全 ${count} パッケージを閲覧`,
+    sortRelevance: "関連度順",
+    sortMostUsed: "利用数順",
+    sortNameAsc: "名前 (A\u2192Z)",
+    sortNameDesc: "名前 (Z\u2192A)",
+    usedBy: (count: number) => `${count} 件が利用`,
   },
 
   // Package detail
