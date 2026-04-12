@@ -101,6 +101,62 @@ area51 add some-lib --url https://example.com/lib.tar.gz`}</code></pre>
 (defun load-config (path)
   (alexandria:read-file-into-string path))`}</code></pre>
           </div>
+          <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.adding.packageLispNote }} />
+          <h3 className="docs-subheading"><code>:import-from</code></h3>
+          <div className="docs-code-block">
+            <span className="docs-code-label">src/package.lisp</span>
+            <pre><code>{`(defpackage #:my-app
+  (:use #:cl)
+  (:import-from #:alexandria #:iota #:when-let)
+  (:import-from #:arrows #:-> #:->>)
+  (:export #:main))`}</code></pre>
+          </div>
+          <p className="docs-text">{t.docs.adding.importFromDesc}</p>
+          <h3 className="docs-subheading"><code>:local-nicknames</code></h3>
+          <div className="docs-code-block">
+            <span className="docs-code-label">src/package.lisp</span>
+            <pre><code>{`(defpackage #:my-app
+  (:use #:cl)
+  (:local-nicknames (#:a #:alexandria))
+  (:export #:main))
+
+;; usage: (a:iota 5)`}</code></pre>
+          </div>
+          <p className="docs-text">{t.docs.adding.localNicknamesDesc}</p>
+          <h3 className="docs-subheading"><code>:use</code></h3>
+          <div className="docs-code-block">
+            <span className="docs-code-label">src/package.lisp</span>
+            <pre><code>{`(defpackage #:my-app
+  (:use #:cl #:arrows)
+  (:export #:main))
+
+;; usage: (-> 3 (+ 20 30))`}</code></pre>
+          </div>
+          <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.adding.useDesc }} />
+          <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.adding.qualifiedDesc }} />
+        </section>
+
+        {/* Interactive development with SLY/SLIME */}
+        <section className="docs-section">
+          <h2 className="docs-section-title">{t.docs.sly.title}</h2>
+          <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.sly.text }} />
+          <p className="docs-text">{t.docs.sly.startText}</p>
+          <div className="docs-code-block">
+            <span className="docs-code-label">Shell</span>
+            <pre><code>area51 repl</code></pre>
+          </div>
+          <p className="docs-text">{t.docs.sly.connectText}</p>
+          <div className="docs-code-block">
+            <span className="docs-code-label">Emacs</span>
+            <pre><code>{t.docs.sly.connectCmd}</code></pre>
+          </div>
+          <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.sly.features }} />
+          <ul className="docs-list">
+            <li dangerouslySetInnerHTML={{ __html: t.docs.sly.portItem }} />
+            <li dangerouslySetInnerHTML={{ __html: t.docs.sly.stopItem }} />
+            <li dangerouslySetInnerHTML={{ __html: t.docs.sly.isolationItem }} />
+          </ul>
+          <p className="docs-text" dangerouslySetInnerHTML={{ __html: t.docs.sly.slynkNote }} />
         </section>
 
         {/* Searching */}
@@ -153,6 +209,7 @@ area51 add some-lib --url https://example.com/lib.tar.gz`}</code></pre>
                 <tr><td><code>area51 build</code></td><td>{t.docs.commands.buildDesc}</td></tr>
                 <tr><td><code>area51 run</code></td><td>{t.docs.commands.runDesc}</td></tr>
                 <tr><td><code>area51 test</code></td><td>{t.docs.commands.testDesc}</td></tr>
+                <tr><td><code>area51 repl</code></td><td>{t.docs.commands.replDesc}</td></tr>
                 <tr><td><code>area51 clean</code></td><td>{t.docs.commands.cleanDesc}</td></tr>
                 <tr><td><code>area51 upgrade</code></td><td>{t.docs.commands.upgradeDesc}</td></tr>
               </tbody>

@@ -52,6 +52,18 @@
   border-bottom: 1px solid rgba(180, 120, 255, 0.12);
 }
 
+.docs-subheading {
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(200, 180, 255, 0.75);
+  margin-top: 1.8rem;
+  margin-bottom: 0.6rem;
+}
+
+.docs-subheading code {
+  font-size: 0.95rem;
+}
+
 .docs-text {
   font-size: 0.88rem;
   color: var(--text-secondary);
